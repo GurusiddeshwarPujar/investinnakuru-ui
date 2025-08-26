@@ -51,11 +51,7 @@ const navItems = [
      path: "/admin/cms",
   },
 
-  // {
-  //   name: "Tables",
-  //   icon: <TableIcon />,
-  //   subItems: [{ name: "Basic Tables", path: "/admin/basic-tables", pro: false }],
-  // },
+  
   // {
   //   name: "Pages",
   //   icon: <PageIcon />,

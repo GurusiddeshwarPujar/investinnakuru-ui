@@ -22,7 +22,7 @@ const getCookie = (name: string) => {
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
-  const [profile, setProfile] = useState<UserProfile | null>(null); // ✅ typed
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
@@ -35,37 +35,44 @@ export default function UserDropdown() {
   const closeDropdown = () => setIsOpen(false);
 
   // ✅ Fetch user profile
-  useEffect(() => {
-    async function fetchProfile() {
-      try {
-        const token = getCookie("authToken");
-        if (!token) {
-          setLoading(false);
-          return;
-        }
-
-        const res = await fetch(`${backendUrl}/api/auth/profile`, {
-          headers: {
-            "Content-Type": "application/json",
-            "x-auth-token": token,
-          },
-        });
-
-        if (!res.ok) {
-          setLoading(false);
-          return;
-        }
-
-        const data: UserProfile = await res.json(); // ✅ cast response
-        setProfile(data);
-      } catch (err) {
-        console.error("Error loading profile", err);
-      } finally {
+  const fetchProfile = async () => {
+    try {
+      const token = getCookie("authToken");
+      if (!token) {
         setLoading(false);
+        return;
       }
-    }
 
+      const res = await fetch(`${backendUrl}/api/auth/profile`, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": token,
+        },
+      });
+
+      if (!res.ok) {
+        setLoading(false);
+        return;
+      }
+
+      const data: UserProfile = await res.json();
+      setProfile(data);
+    } catch (err) {
+      console.error("Error loading profile", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch first time
     fetchProfile();
+
+    // 🔁 Poll every 5s for updated profile
+    const interval = setInterval(fetchProfile, 5000);
+
+    // Cleanup interval when component unmounts
+    return () => clearInterval(interval);
   }, [backendUrl]);
 
   return (
