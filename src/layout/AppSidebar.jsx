@@ -45,6 +45,12 @@ const navItems = [
     icon: <UserCircleIcon />,
      path: "/admin/contact-us",
   },
+  {
+    name: "Manage CMS",
+    icon: <PageIcon />,
+     path: "/admin/cms",
+  },
+
   // {
   //   name: "Tables",
   //   icon: <TableIcon />,
