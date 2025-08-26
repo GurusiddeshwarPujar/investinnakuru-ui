@@ -46,7 +46,7 @@ const navItems = [
      path: "/admin/contact-us",
   },
   {
-    name: "Manage CMS",
+    name: "CMS",
     icon: <PageIcon />,
      path: "/admin/cms",
   },
