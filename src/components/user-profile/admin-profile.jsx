@@ -18,7 +18,6 @@ const getCookie = (name) => {
 
 export default function AdminProfileCard() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
-    // const router = useRouter(); // Removed as it's not available here.
     const [loading, setLoading] = useState(true);
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -181,7 +180,7 @@ export default function AdminProfileCard() {
                                     {...register("phoneNumber", {
                                         required: "Please enter phone number.",
                                         pattern: {
-                                            value: /^[0-9]{9}$/,
+                                            value: /^[0-9]{10}$/,
                                             message: "Invalid phone number format"
                                         }
                                     })}
