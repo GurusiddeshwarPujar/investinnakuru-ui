@@ -41,7 +41,7 @@ export async function middleware(req) {
       return NextResponse.redirect(new URL('/admin/login', req.url));
     }
 
-debugger;
+
     // Verify the user's live status from the backend.
     try {
       const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;

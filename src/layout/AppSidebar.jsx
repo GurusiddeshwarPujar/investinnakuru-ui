@@ -28,17 +28,11 @@ const navItems = [
     path: "/admin",
     // subItems: [{ name: "Ecommerce", path: "/admin", pro: false }],
   },
-  // {
-  //   icon: <CalenderIcon />,
-  //   name: "Calendar",
-  //   path: "/admin/calendar",
-  // },
   {
-    icon:  <SettingIcon />,
-    name: "Settings",
-    path: "/admin/settings",
+    name:"Manage Categories",
+    icon :<ListIcon/>,
+    path:"/admin/category",
   },
-
 
   {
     name: "Contacts Received",
@@ -49,6 +43,11 @@ const navItems = [
     name: "CMS",
     icon: <PageIcon />,
      path: "/admin/cms",
+  },
+  {
+    icon:  <SettingIcon />,
+    name: "Settings",
+    path: "/admin/settings",
   },
 
   
