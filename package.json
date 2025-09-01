@@ -23,6 +23,7 @@
     "autoprefixer": "^10.4.20",
     "build": "^0.1.4",
     "flatpickr": "^4.6.13",
+    "html-react-parser": "^5.2.6",
     "next": "15.2.3",
     "next-themes": "^0.4.6",
     "nookies": "^2.5.2",

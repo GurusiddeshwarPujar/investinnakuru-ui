@@ -1,0 +1,286 @@
+'use client';
+
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Editor } from "primereact/editor";
+import Button from "../ui/button/Button";
+
+// ✅ Function to generate a URL slug from a string
+const generateUrlSlug = (title = "") => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-");
+};
+
+export default function AddNewsForm({
+  backendUrl,
+  authToken,
+  categories,
+  editingNews,
+  setEditingNews,
+  onNewsAdded,
+  onNewsUpdated,
+  onError,
+  handleAuthError,
+}) {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    formState: { isSubmitting, errors },
+  } = useForm({
+    defaultValues: {
+      CatId: "",
+      NewsTitle: "",
+      NewsURL: "",
+      NewsDescription: "",
+      Image: null,
+    },
+  });
+
+  const newsTitle = watch("NewsTitle");
+  const newsDescription = watch("NewsDescription");
+  const imageFile = watch("Image");
+
+  const [imagePreview, setImagePreview] = useState(null);
+
+  // ✅ Auto-generate slug from title
+  useEffect(() => {
+    if (newsTitle) {
+      setValue("NewsURL", generateUrlSlug(newsTitle), { shouldValidate: true });
+    }
+  }, [newsTitle, setValue]);
+
+  // ✅ Handle editing mode (reset form values + image preview)
+  useEffect(() => {
+    if (editingNews) {
+      reset({
+        CatId: editingNews.CatId,
+        NewsTitle: editingNews.NewsTitle,
+        NewsURL: editingNews.NewsURL,
+        NewsDescription: editingNews.NewsDescription,
+        Image: null,
+      });
+
+      setImagePreview(editingNews.Image ? `${backendUrl}${editingNews.Image}` : null);
+    } else {
+      reset();
+      setImagePreview(null);
+    }
+  }, [editingNews, reset, backendUrl]);
+
+  // ✅ Handle new image preview
+  useEffect(() => {
+    if (imageFile && imageFile[0]) {
+      const url = URL.createObjectURL(imageFile[0]);
+      setImagePreview(url);
+      return () => URL.revokeObjectURL(url);
+    }
+  }, [imageFile]);
+
+  // ✅ Submit form
+  const handleFormSubmit = async (data) => {
+    const formData = new FormData();
+
+    for (const key in data) {
+      if (key === "Image" && data[key] && data[key][0]) {
+        formData.append(key, data[key][0]);
+      } else if (key !== "Image") {
+        formData.append(key, data[key]);
+      }
+    }
+
+    try {
+      const url = editingNews
+        ? `${backendUrl}/api/admin/news/${editingNews.NewsId}`
+        : `${backendUrl}/api/admin/news`;
+      const method = editingNews ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
+        headers: { "x-auth-token": authToken || "" },
+        body: formData,
+      });
+
+      if (res.status === 401) {
+        handleAuthError();
+        return;
+      }
+
+      const resData = await res.json();
+      if (!res.ok) {
+        throw new Error(resData.msg || `Error during ${editingNews ? "update" : "creation"}.`);
+      }
+
+      editingNews ? onNewsUpdated() : onNewsAdded();
+      reset();
+      setEditingNews(null);
+      setImagePreview(null);
+    } catch (err) {
+      onError(err.message);
+    }
+  };
+
+  // ✅ Cancel action
+  const handleCancel = () => {
+    reset({
+      CatId: "",
+      NewsTitle: "",
+      NewsURL: "",
+      NewsDescription: "",
+      Image: null,
+    });
+    setEditingNews(null);
+    setImagePreview(null);
+  };
+
+  return (
+    <div className="mb-6">
+      <h2 className="text-2xl font-bold">
+        {editingNews ? "Update News Article" : "Add New News Article"}
+      </h2>
+
+      <form
+        onSubmit={handleSubmit(handleFormSubmit)}
+        className="space-y-4 mt-4"
+        encType="multipart/form-data"
+      >
+        {/* Category Dropdown */}
+        <div>
+          <label htmlFor="catId" className="block mb-2 text-sm font-medium">
+            Category
+          </label>
+          <select
+            id="catId"
+            {...register("CatId", { required: "Please select a category." })}
+            className="block w-full rounded-lg border border-gray-300 p-2.5 text-sm"
+          >
+            <option value="">-- Select Category --</option>
+            {categories.map((cat) => (
+              <option key={cat.CatId} value={cat.CatId}>
+                {cat.CatName}
+              </option>
+            ))}
+          </select>
+          {errors.CatId && <p className="mt-2 text-sm text-red-600">{errors.CatId.message}</p>}
+        </div>
+
+        {/* News Title */}
+        <div>
+          <label htmlFor="newsTitle" className="block mb-2 text-sm font-medium">
+            News Title
+          </label>
+          <input
+            type="text"
+            id="newsTitle"
+            {...register("NewsTitle", { required: "Please enter news title." })}
+            className="block w-full rounded-lg border border-gray-300 p-2.5 text-sm"
+          />
+          {errors.NewsTitle && <p className="mt-2 text-sm text-red-600">{errors.NewsTitle.message}</p>}
+        </div>
+
+        {/* News URL */}
+        <div>
+          <label htmlFor="newsUrl" className="block mb-2 text-sm font-medium">
+            News URL
+          </label>
+          <input
+            type="text"
+            id="newsUrl"
+            {...register("NewsURL", { required: "Please enter news URL." })}
+            readOnly
+            className="block w-full rounded-lg border border-gray-300 bg-gray-100 p-2.5 text-sm text-gray-500 cursor-not-allowed"
+          />
+          {errors.NewsURL && <p className="mt-2 text-sm text-red-600">{errors.NewsURL.message}</p>}
+        </div>
+
+        {/* Description */}
+        <div>
+          <label htmlFor="newsDescription" className="block mb-2 text-sm font-medium">
+            Description
+          </label>
+          <Editor
+            value={newsDescription}
+            onTextChange={(e) =>
+              setValue("NewsDescription", e.htmlValue, { shouldValidate: true })
+            }
+            style={{ height: "320px" }}
+          />
+          {/* Hidden input for validation */}
+          <input
+            type="hidden"
+            {...register("NewsDescription", {
+              required: "Please enter description.",
+              validate: (value) => {
+                const plainText = value.replace(/<[^>]*>/g, "").trim();
+                return (
+                  plainText.length >= 20 ||
+                  "Description must be at least 20 characters long."
+                );
+              },
+            })}
+          />
+          {errors.NewsDescription && (
+            <p className="mt-2 text-sm text-red-600">{errors.NewsDescription.message}</p>
+          )}
+        </div>
+
+        {/* Image Upload */}
+        <div>
+          <label htmlFor="image" className="block mb-2 text-sm font-medium">
+            Image
+          </label>
+          <input
+            type="file"
+            id="image"
+            {...register("Image", {
+              required: !editingNews && "Please upload Image.",
+              validate: (fileList) => {
+                if (fileList?.length > 0) {
+                  const file = fileList[0];
+                  const allowedTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
+                  if (!allowedTypes.includes(file.type)) {
+                    return "Invalid file type. Only JPG, PNG, JPEG, and WEBP allowed.";
+                  }
+                }
+                return true;
+              },
+            })}
+            accept=".jpeg, .png, .jpg, .webp"
+            className="block w-full rounded-lg border border-gray-300 p-2.5 text-sm"
+          />
+          {errors.Image && <p className="mt-2 text-sm text-red-600">{errors.Image.message}</p>}
+          {imagePreview && (
+            <div className="mt-4">
+              <h3 className="text-lg font-medium">Image Preview</h3>
+              <img
+                src={imagePreview}
+                alt="Image Preview"
+                className="mt-2 max-w-full h-auto rounded-lg shadow-md"
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Buttons */}
+        <div className="flex space-x-2">
+          <Button type="submit" disabled={isSubmitting} className="mt-2">
+            {isSubmitting ? "Processing..." : editingNews ? "Update News" : "Add News"}
+          </Button>
+          <Button
+            type="button"
+            onClick={handleCancel}
+            className="mt-2 bg-gray-300 hover:bg-gray-400 text-gray-800"
+          >
+            Cancel
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+}

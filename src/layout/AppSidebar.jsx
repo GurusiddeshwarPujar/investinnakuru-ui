@@ -33,7 +33,11 @@ const navItems = [
     icon :<ListIcon/>,
     path:"/admin/category",
   },
-
+  {
+    icon:  <BoxCubeIcon />,
+    name: "Manage News",
+    path: "/admin/news",
+  },
   {
     name: "Contacts Received",
     icon: <UserCircleIcon />,
