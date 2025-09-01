@@ -48,11 +48,17 @@ const navItems = [
     icon: <PageIcon />,
      path: "/admin/cms",
   },
+       {
+    icon:  <ListIcon />,
+    name: "Manage Newsletter Subscibers",
+    path: "/admin/newsletter-subscribers",
+  },
   {
     icon:  <SettingIcon />,
     name: "Settings",
     path: "/admin/settings",
   },
+
 
   
   // {
