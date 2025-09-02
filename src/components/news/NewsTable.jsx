@@ -108,6 +108,7 @@ export default function NewsTable({
               currentNews.map((article) => (
                 <tr key={article.NewsId} className="border-b">
                    <td className="px-4 py-3">
+                    <div className="w-16 h-16 flex-shrink-0 flex items-center justify-center">
                     {article.Image && (
                       <img
                         src={`${backendUrl}${article.Image}`}
@@ -115,7 +116,9 @@ export default function NewsTable({
                         className="object-cover rounded-lg"
                       />
                     )}
+                    </div>
                   </td>
+                  
                   <td className="px-4 py-3">{article.NewsTitle}</td>
                   <td className="px-4 py-3">{article.category.CatName}</td>
                   <td className="px-4 py-3">{article.NewsURL}</td>
@@ -183,78 +186,76 @@ export default function NewsTable({
       </div>
 
       {/* News Details Modal (Popup) */}
-      {selectedNews && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70 overflow-y-auto">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-2xl w-full mx-4">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">News Details</h3>
-            </div>
-            
-            {/* Scrollable Content Area */}
-            <div className="border rounded-lg divide-y divide-gray-200 dark:divide-gray-700 max-h-[70vh] overflow-y-auto">
-                {/* News Image */}
-                {selectedNews.Image && (
-                    <div className="p-4">
-                        <img
-                            src={`${backendUrl}${selectedNews.Image}`}
-                            alt={selectedNews.NewsTitle}
-                            className="w-full h-auto rounded-lg shadow-md"
-                        />
-                    </div>
-                )}
-              
-                {/* News Details */}
-                <div className="p-4">
-                    <div className="flex justify-between items-center px-4 py-2">
-                        <span className="font-medium text-gray-700 dark:text-gray-300">Category:</span>
-                        <span className="text-gray-900 dark:text-white text-right">{selectedNews.category.CatName}</span>
-                    </div>
-                    <div className="flex justify-between items-center px-4 py-2">
-                        <span className="font-medium text-gray-700 dark:text-gray-300">Title:</span>
-                            {selectedNews.NewsTitle}
-                    </div>
-                    <div className="flex justify-between items-center px-4 py-2">
-                        <span className="font-medium text-gray-700 dark:text-gray-300">URL:</span>
-                            {selectedNews.NewsURL}
-                    </div>
-                    <div className="flex justify-between items-center px-4 py-2">
-                        <span className="font-medium text-gray-700 dark:text-gray-300">Created At:</span>
-                        <span className="text-gray-900 dark:text-white text-right">{new Date(selectedNews.createdAt).toLocaleDateString("en-GB", {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    })
-                    .replace(/ /g, "/")}</span>
-                    </div>
-                    <div className="flex justify-between items-center px-4 py-2">
-                        <span className="font-medium text-gray-700 dark:text-gray-300">Last Updated:</span>
-                        <span className="text-gray-900 dark:text-white text-right">{new Date(selectedNews.updatedAt).toLocaleDateString("en-GB", {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    })
-                    .replace(/ /g, "/")}</span>
-                    </div>
-                </div>
-
-                {/* Full Article */}
-                <div className="px-4 py-2">
-                    <span className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Description:</span>
-                    <div className="prose dark:prose-invert max-w-none text-gray-900 dark:text-white" dangerouslySetInnerHTML={{ __html: selectedNews.NewsDescription }} />
-                </div>
-            </div>
-
-            <div className="flex justify-end mt-4">
-              <button
-                onClick={() => setSelectedNews(null)}
-                className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
-              >
-                Close
-              </button>
-            </div>
+    {selectedNews && (
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70 overflow-y-auto">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-3xl w-full mx-4">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white">News Details</h3>
+      </div>
+      
+      {/* Scrollable Content Area */}
+      <div className="border rounded-lg divide-y divide-gray-200 dark:divide-gray-700 max-h-[50vh] overflow-y-auto">
+        {/* News Image */}
+        {selectedNews.Image && (
+          <div className="p-4">
+            <img
+              src={`${backendUrl}${selectedNews.Image}`}
+              alt={selectedNews.NewsTitle}
+              className="w-full h-auto rounded-lg shadow-md"
+            />
+          </div>
+        )}
+      
+        {/* News Details */}
+        <div className="p-4">
+          <div className="flex justify-between items-center px-4 py-2">
+            <span className="font-medium text-gray-700 dark:text-gray-300">Category:</span>
+            <span className="text-gray-900 dark:text-white text-right">{selectedNews.category.CatName}</span>
+          </div>
+          <div className="flex justify-between items-center px-4 py-2">
+            <span className="font-medium text-gray-700 dark:text-gray-300">Title:</span>
+            {selectedNews.NewsTitle}
+          </div>
+          <div className="flex justify-between items-center px-4 py-2">
+            <span className="font-medium text-gray-700 dark:text-gray-300">URL:</span>
+            {selectedNews.NewsURL}
+          </div>
+          <div className="flex justify-between items-center px-4 py-2">
+            <span className="font-medium text-gray-700 dark:text-gray-300">Created At:</span>
+            <span className="text-gray-900 dark:text-white text-right">{new Date(selectedNews.createdAt).toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            }).replace(/ /g, "/")}</span>
+          </div>
+          <div className="flex justify-between items-center px-4 py-2">
+            <span className="font-medium text-gray-700 dark:text-gray-300">Last Updated:</span>
+            <span className="text-gray-900 dark:text-white text-right">{new Date(selectedNews.updatedAt).toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            }).replace(/ /g, "/")}</span>
           </div>
         </div>
-      )}
+
+        {/* Full Article */}
+        <div className="px-4 py-2">
+          <span className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Description:</span>
+          <div className="prose dark:prose-invert max-w-none text-gray-900 dark:text-white" dangerouslySetInnerHTML={{ __html: selectedNews.NewsDescription }} />
+        </div>
+      </div>
+
+      <div className="flex justify-end mt-4">
+        <button
+          onClick={() => setSelectedNews(null)}
+          className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }

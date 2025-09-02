@@ -5,6 +5,7 @@ import { parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/navigation";
 import AddNewsForm from "./AddNewsForm";
 import NewsTable from "./NewsTable";
+import Button from "../ui/button/Button"; 
 
 export default function NewsManager() {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || '';
@@ -15,6 +16,7 @@ export default function NewsManager() {
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [editingNews, setEditingNews] = useState(null);
+  const [view, setView] = useState('list'); 
   const { authToken } = parseCookies();
 
   const handleAuthError = () => {
@@ -52,13 +54,7 @@ export default function NewsManager() {
       }
       if (!res.ok) throw new Error("Failed to fetch news.");
       const data = await res.json();
-
-      const newsWithFullImages = data.map(item => ({
-        ...item,
-        Image: `${item.Image}`
-      }));
-
-      setNews(newsWithFullImages);
+      setNews(data);
     } catch (err) {
       setStatus(err.message);
     } finally {
@@ -77,6 +73,24 @@ export default function NewsManager() {
       return () => clearTimeout(timer);
     }
   }, [status]);
+
+  // Handler for adding a new article
+  const handleAddClick = () => {
+    setEditingNews(null); // Clear any editing state
+    setView('form');
+  };
+
+  // Handler for editing an existing article
+  const handleEditClick = (article) => {
+    setEditingNews(article);
+    setView('form');
+  };
+
+  // Handler to go back to the list view
+  const handleBackToList = () => {
+    fetchNews(); // Refresh news list
+    setView('list');
+  };
 
   if (isLoading) {
     return (
@@ -97,36 +111,43 @@ export default function NewsManager() {
           {status}
         </div>
       )}
-      <AddNewsForm
-        backendUrl={backendUrl}
-        authToken={authToken}
-        categories={categories}
-        editingNews={editingNews}
-        setEditingNews={setEditingNews}
-        onNewsAdded={() => {
-          setStatus("News article added successfully!");
-          fetchNews();
-        }}
-        onNewsUpdated={() => {
-          setStatus("News article updated successfully!");
-          setEditingNews(null);
-          fetchNews();
-        }}
-        onError={(message) => setStatus(message)}
-        handleAuthError={handleAuthError}
-      />
-      <div className="border-t border-gray-200 pt-6 mt-6">
-        <NewsTable
-          news={news}
-          onEditClick={setEditingNews}
-          onNewsDeleted={() => {
-            setStatus("News article deleted successfully!");
-            fetchNews();
+
+      {view === 'list' ? (
+        <>
+          <div className="flex justify-end mb-4">
+            <Button onClick={handleAddClick}>Add News Article</Button>
+          </div>
+          <NewsTable
+            news={news}
+            onEditClick={handleEditClick}
+            onNewsDeleted={() => {
+              setStatus("News article deleted successfully!");
+              fetchNews();
+            }}
+            onError={(message) => setStatus(message)}
+            handleAuthError={handleAuthError}
+          />
+        </>
+      ) : (
+        <AddNewsForm
+          backendUrl={backendUrl}
+          authToken={authToken}
+          categories={categories}
+          editingNews={editingNews}
+          setEditingNews={setEditingNews}
+          onNewsAdded={() => {
+            setStatus("News article added successfully!");
+            handleBackToList();
+          }}
+          onNewsUpdated={() => {
+            setStatus("News article updated successfully!");
+            handleBackToList();
           }}
           onError={(message) => setStatus(message)}
           handleAuthError={handleAuthError}
+          onCancel={handleBackToList} // Add a new prop for the cancel button
         />
-      </div>
+      )}
     </div>
   );
 }
