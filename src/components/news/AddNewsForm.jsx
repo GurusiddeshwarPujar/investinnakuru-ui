@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { Editor } from "primereact/editor";
 import Button from "../ui/button/Button";
 
-// ✅ Function to generate a URL slug from a string
 const generateUrlSlug = (title = "") => {
   return title
     .toLowerCase()
@@ -25,11 +24,11 @@ export default function AddNewsForm({
   onNewsUpdated,
   onError,
   handleAuthError,
+  onCancel, // New prop
 }) {
   const {
     register,
     handleSubmit,
-    setValue,
     watch,
     reset,
     formState: { isSubmitting, errors },
@@ -37,44 +36,39 @@ export default function AddNewsForm({
     defaultValues: {
       CatId: "",
       NewsTitle: "",
-      NewsURL: "",
       NewsDescription: "",
       Image: null,
     },
   });
 
+  const [slug, setSlug] = useState("");
+  const [imagePreview, setImagePreview] = useState(null);
+
   const newsTitle = watch("NewsTitle");
   const newsDescription = watch("NewsDescription");
   const imageFile = watch("Image");
 
-  const [imagePreview, setImagePreview] = useState(null);
-
-  // ✅ Auto-generate slug from title
   useEffect(() => {
-    if (newsTitle) {
-      setValue("NewsURL", generateUrlSlug(newsTitle), { shouldValidate: true });
-    }
-  }, [newsTitle, setValue]);
+    setSlug(generateUrlSlug(newsTitle));
+  }, [newsTitle]);
 
-  // ✅ Handle editing mode (reset form values + image preview)
   useEffect(() => {
     if (editingNews) {
       reset({
         CatId: editingNews.CatId,
         NewsTitle: editingNews.NewsTitle,
-        NewsURL: editingNews.NewsURL,
         NewsDescription: editingNews.NewsDescription,
         Image: null,
       });
-
+      setSlug(editingNews.NewsURL);
       setImagePreview(editingNews.Image ? `${backendUrl}${editingNews.Image}` : null);
     } else {
       reset();
+      setSlug("");
       setImagePreview(null);
     }
   }, [editingNews, reset, backendUrl]);
 
-  // ✅ Handle new image preview
   useEffect(() => {
     if (imageFile && imageFile[0]) {
       const url = URL.createObjectURL(imageFile[0]);
@@ -83,9 +77,9 @@ export default function AddNewsForm({
     }
   }, [imageFile]);
 
-  // ✅ Submit form
   const handleFormSubmit = async (data) => {
     const formData = new FormData();
+    formData.append("NewsURL", slug);
 
     for (const key in data) {
       if (key === "Image" && data[key] && data[key][0]) {
@@ -120,23 +114,18 @@ export default function AddNewsForm({
       editingNews ? onNewsUpdated() : onNewsAdded();
       reset();
       setEditingNews(null);
+      setSlug("");
       setImagePreview(null);
     } catch (err) {
       onError(err.message);
     }
   };
 
-  // ✅ Cancel action
   const handleCancel = () => {
-    reset({
-      CatId: "",
-      NewsTitle: "",
-      NewsURL: "",
-      NewsDescription: "",
-      Image: null,
-    });
-    setEditingNews(null);
-    setImagePreview(null);
+    // Call the onCancel prop from the parent
+    if (onCancel) {
+      onCancel();
+    }
   };
 
   return (
@@ -192,11 +181,10 @@ export default function AddNewsForm({
           <input
             type="text"
             id="newsUrl"
-            {...register("NewsURL", { required: "Please enter news URL." })}
+            value={slug}
             readOnly
             className="block w-full rounded-lg border border-gray-300 bg-gray-100 p-2.5 text-sm text-gray-500 cursor-not-allowed"
           />
-          {errors.NewsURL && <p className="mt-2 text-sm text-red-600">{errors.NewsURL.message}</p>}
         </div>
 
         {/* Description */}
@@ -207,11 +195,10 @@ export default function AddNewsForm({
           <Editor
             value={newsDescription}
             onTextChange={(e) =>
-              setValue("NewsDescription", e.htmlValue, { shouldValidate: true })
+              reset({ ...watch(), NewsDescription: e.htmlValue })
             }
             style={{ height: "320px" }}
           />
-          {/* Hidden input for validation */}
           <input
             type="hidden"
             {...register("NewsDescription", {
@@ -219,8 +206,7 @@ export default function AddNewsForm({
               validate: (value) => {
                 const plainText = value.replace(/<[^>]*>/g, "").trim();
                 return (
-                  plainText.length >= 20 ||
-                  "Description must be at least 20 characters long."
+                  plainText.length >= 20 || "Description must be at least 20 characters long."
                 );
               },
             })}

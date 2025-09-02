@@ -111,16 +111,16 @@ export default function CategoryTable({ categories, onEditClick, onCategoryDelet
                   <td className="py-3 px-4 text-gray-800">
                     {new Date(category.updatedAt).toLocaleDateString()}
                   </td>
-                  <td className="py-3 px-4 flex space-x-2">
+                  <td className="px-4 py-3 flex gap-2">
                     <button
                       onClick={() => onEditClick(category)}
-                      className="text-blue-600 hover:underline"
+                      className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(category.CatId)}
-                      className="text-red-600 hover:underline"
+                      className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"//text-red-600 hover:underline
                     >
                       Delete
                     </button>
