@@ -16,7 +16,7 @@ import {
   PlugInIcon,
   TableIcon,
   UserCircleIcon,
-
+DocsIcon,
   SettingIcon,
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
@@ -47,6 +47,11 @@ const navItems = [
     name: "Contacts Received",
     icon: <UserCircleIcon />,
      path: "/admin/contact-us",
+  },
+   {
+    name: "Manage Banner",
+    icon: <DocsIcon />,
+     path: "/admin/banner",
   },
   {
     name: "CMS",
