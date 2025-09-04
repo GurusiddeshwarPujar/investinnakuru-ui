@@ -106,10 +106,18 @@ export default function CategoryTable({ categories, onEditClick, onCategoryDelet
                   <td className="py-3 px-4 text-gray-800">{category.CatName}</td>
                   <td className="py-3 px-4 text-gray-800">{category.CatURL}</td>
                   <td className="py-3 px-4 text-gray-800">
-                    {new Date(category.createdAt).toLocaleDateString()}
+                    {new Date(category.createdAt).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    }).replace(/ /g, "/")}
                   </td>
                   <td className="py-3 px-4 text-gray-800">
-                    {new Date(category.updatedAt).toLocaleDateString()}
+                    {new Date(category.updatedAt).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    }).replace(/ /g, "/")}
                   </td>
                   <td className="px-4 py-3 flex gap-2">
                     <button

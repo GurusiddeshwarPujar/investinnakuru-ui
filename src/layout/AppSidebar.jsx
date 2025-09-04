@@ -34,6 +34,11 @@ const navItems = [
     path:"/admin/category",
   },
   {
+    icon:  <CalenderIcon />,
+    name: "Manage Events",
+    path: "/admin/events",
+  },
+  {
     icon:  <BoxCubeIcon />,
     name: "Manage News",
     path: "/admin/news",
@@ -50,7 +55,7 @@ const navItems = [
   },
        {
     icon:  <ListIcon />,
-    name: "Manage Newsletter Subscibers",
+    name: "Newsletter Subscibers",
     path: "/admin/newsletter-subscribers",
   },
   {
