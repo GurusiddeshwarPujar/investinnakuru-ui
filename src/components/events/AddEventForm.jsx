@@ -39,11 +39,14 @@ export default function AddEventForm({
       EventTitle: "",
       Description: "",
       EventDate: null,
+      EventEndDate: null,
+      Location: "",
     },
   });
 
   const [slug, setSlug] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
   const eventTitle = watch("EventTitle");
   const description = watch("Description");
 
@@ -54,16 +57,21 @@ export default function AddEventForm({
   useEffect(() => {
     if (editingEvent) {
       const eventDate = new Date(editingEvent.EventDate);
+      const eventEndDate = editingEvent.EventEndDate ? new Date(editingEvent.EventEndDate) : null;
       reset({
         EventTitle: editingEvent.EventTitle,
         Description: editingEvent.Description,
+        Location: editingEvent.Location,
       });
       setSelectedDate(eventDate);
+      setSelectedEndDate(eventEndDate);
       setValue("EventDate", eventDate, { shouldValidate: true });
+      setValue("EventEndDate", eventEndDate, { shouldValidate: true });
       setSlug(editingEvent.EventURL);
     } else {
       reset();
       setSelectedDate(null);
+      setSelectedEndDate(null);
       setSlug("");
     }
   }, [editingEvent, reset, setValue]);
@@ -73,6 +81,7 @@ export default function AddEventForm({
       ...data,
       EventURL: slug,
       EventDate: selectedDate ? selectedDate.toISOString() : null,
+      EventEndDate: selectedEndDate ? selectedEndDate.toISOString() : null,
     };
 
     try {
@@ -103,6 +112,7 @@ export default function AddEventForm({
       editingEvent ? onEventUpdated() : onEventAdded();
       reset();
       setSelectedDate(null);
+      setSelectedEndDate(null);
       setEditingEvent(null);
       setSlug("");
     } catch (err) {
@@ -115,6 +125,11 @@ export default function AddEventForm({
     setValue("EventDate", date, { shouldValidate: true });
   };
 
+  const handleEndDateChange = (date) => {
+    setSelectedEndDate(date);
+    setValue("EventEndDate", date, { shouldValidate: true });
+  };
+
   return (
     <div className="mb-6">
       <h2 className="text-2xl font-bold">
@@ -124,9 +139,7 @@ export default function AddEventForm({
         onSubmit={handleSubmit(handleFormSubmit)}
         className="space-y-4 mt-4"
       >
-      
         <div className="flex flex-wrap -mx-2">
-          
           <div className="w-full md:w-2/3 px-2 mb-4 md:mb-0">
             <label htmlFor="EventTitle" className="block mb-2 text-sm font-medium">
               Event Title
@@ -140,37 +153,69 @@ export default function AddEventForm({
             {errors.EventTitle && <p className="mt-2 text-sm text-red-600">{errors.EventTitle.message}</p>}
           </div>
 
-          
-          <div className="w-full md:w-1/3 px-2">
-            <label htmlFor="EventDate" className="block mb-2 text-sm font-medium">
-              Event Date
-            </label>
-            <DatePicker
-              selected={selectedDate}
-              onChange={handleDateChange}
-              minDate={new Date()}
-              dateFormat="dd/MM/yyyy"
-              className="block w-full rounded-lg border border-gray-300 p-2.5 text-sm cursor-pointer"
-              placeholderText="Select a date"
-            />
-            <input
-              type="hidden"
-              {...register("EventDate", {
-                required: "Please select an event date.",
-              })}
-            />
-            {errors.EventDate && <p className="mt-2 text-sm text-red-600">{errors.EventDate.message}</p>}
+          <div className="w-full md:w-1/3 px-2 flex space-x-2">
+            <div className="w-1/2">
+              <label htmlFor="EventDate" className="block mb-2 text-sm font-medium">
+               Event Start Date
+              </label>
+              <DatePicker
+                selected={selectedDate}
+                onChange={handleDateChange}
+                minDate={new Date()}
+                dateFormat="dd/MM/yyyy"
+                className="block w-full rounded-lg border border-gray-300 p-2.5 text-sm cursor-pointer"
+                placeholderText="Select start date"
+              />
+              <input
+                type="hidden"
+                {...register("EventDate", {
+                  required: "Please select a start date.",
+                })}
+              />
+              {errors.EventDate && <p className="mt-2 text-sm text-red-600">{errors.EventDate.message}</p>}
+            </div>
+
+            <div className="w-1/2">
+              <label htmlFor="EventEndDate" className="block mb-2 text-sm font-medium">
+               Event End Date
+              </label>
+              <DatePicker
+                selected={selectedEndDate}
+                onChange={handleEndDateChange}
+                minDate={selectedDate || new Date()}
+                dateFormat="dd/MM/yyyy"
+                className="block w-full rounded-lg border border-gray-300 p-2.5 text-sm cursor-pointer"
+                placeholderText="Select end date"
+                isClearable
+              />
+              <input
+                type="hidden"
+                {...register("EventEndDate")}
+              />
+            </div>
           </div>
         </div>
+        
+        <div className="w-full px-2">
+          <label htmlFor="Location" className="block mb-2 text-sm font-medium">
+            Location
+          </label>
+          <input
+            type="text"
+            id="Location"
+            {...register("Location", { required: "Please enter event location." })}
+            className="block w-full rounded-lg border border-gray-300 p-2.5 text-sm"
+          />
+          {errors.Location && <p className="mt-2 text-sm text-red-600">{errors.Location.message}</p>}
+        </div>
 
-       
         <div>
           <label htmlFor="Description" className="block mb-2 text-sm font-medium">
             Description
           </label>
-            <Editor
+          <Editor
             value={description}
-            onTextChange={(e) => reset({ ...watch(), Description: e.htmlValue })}
+            onTextChange={(e) => setValue("Description", e.htmlValue, { shouldValidate: true })}
             style={{ height: "320px" }}
           />
           <input
@@ -190,7 +235,6 @@ export default function AddEventForm({
           )}
         </div>
 
-        
         <div className="flex space-x-2">
           <Button type="submit" disabled={isSubmitting} className="mt-2">
             {isSubmitting ? "Processing..." : editingEvent ? "Update Event" : "Add Event"}
