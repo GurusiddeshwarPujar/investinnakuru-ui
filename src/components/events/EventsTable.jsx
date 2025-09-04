@@ -18,34 +18,28 @@ export default function EventsTable({
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [search, setSearch] = useState("");
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [eventToDelete, setEventToDelete] = useState(null);
 
-  const handleDelete = (eventId) => {
-    setEventToDelete(eventId);
-    setShowConfirmModal(true);
-  };
+  const handleDelete = async (eventId) => {
+    if (window.confirm("Are you sure you want to delete this event?")) {
+      try {
+        const res = await fetch(`${backendUrl}/api/events/${eventId}`, {
+          method: "DELETE",
+          headers: { "x-auth-token": authToken || "" },
+        });
 
-  const confirmDelete = async () => {
-    try {
-      const res = await fetch(`${backendUrl}/api/events/${eventToDelete}`, {
-        method: "DELETE",
-        headers: { "x-auth-token": authToken || "" },
-      });
-
-      if (!res.ok) {
-        if (res.status === 401) {
-          handleAuthError();
-          return;
+        if (!res.ok) {
+          if (res.status === 401) {
+            handleAuthError();
+            return;
+          }
+          throw new Error(
+            `Failed to delete event: Server responded with ${res.status}`
+          );
         }
-        throw new Error(
-          `Failed to delete event: Server responded with ${res.status}`
-        );
+        onEventDeleted();
+      } catch (err) {
+        onError(err.message);
       }
-      onEventDeleted();
-      setShowConfirmModal(false);
-    } catch (err) {
-      onError(err.message);
     }
   };
 
@@ -139,6 +133,16 @@ export default function EventsTable({
                       year: "numeric",
                     }).replace(/ /g, "/")}
                   </td>
+                  {/* <td className="px-6 py-3">
+                    <button
+                      onClick={() => handleToggleFeatured(event.EventID)}
+                      className={`py-1 px-2 rounded text-white ${
+                        event.Featured ? "bg-green-500" : "bg-red-500"
+                      }`}
+                    >
+                      {event.Featured ? "Yes" : "No"}
+                    </button>
+                  </td> */}
                   <td className="px-6 py-3">
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input
@@ -151,6 +155,7 @@ export default function EventsTable({
                       <div className="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md peer-checked:translate-x-full transition-transform"></div>
                     </label>
                   </td>
+
                   <td className="px-6 py-3 flex gap-2">
                     <button
                       onClick={() => setSelectedEvent(event)}
@@ -208,7 +213,7 @@ export default function EventsTable({
 
       {/* Event Details Modal (Popup) */}
       {selectedEvent && (
-        <div className="fixed inset-0  flex items-center justify-center bg-gray-200 bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70 overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70 overflow-y-auto">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-3xl w-full mx-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">Event Details</h3>
@@ -250,6 +255,7 @@ export default function EventsTable({
                     </span>
                   </div>
                 )}
+
                 
                 <div className="flex justify-between items-center px-4 py-2">
                   <span className="font-medium text-gray-700 dark:text-gray-300">Featured:</span>
@@ -291,30 +297,6 @@ export default function EventsTable({
                 className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
               >
                 Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Confirmation Modal for Deletion */}
-      {showConfirmModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-200 bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-sm w-full mx-4">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Confirm Deletion</h3>
-            <p className="text-gray-700 dark:text-gray-300 mb-6">Are you sure you want to delete this event?</p>
-            <div className="flex justify-end space-x-4">
-              <button
-                onClick={() => setShowConfirmModal(false)}
-                className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmDelete}
-                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
-              >
-                Delete
               </button>
             </div>
           </div>
