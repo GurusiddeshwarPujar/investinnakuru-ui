@@ -61,7 +61,7 @@ export default function AddNewsForm({
         Image: null,
       });
       setSlug(editingNews.NewsURL);
-      setImagePreview(editingNews.Image ? `${backendUrl}${editingNews.Image}` : null);
+      setImagePreview(editingNews.Image ? `${backendUrl}/images/news/${editingNews.Image}` : null);
     } else {
       reset();
       setSlug("");

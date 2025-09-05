@@ -36,7 +36,7 @@ export default function AddBannerForm({
       reset({ BannerImage: null });
       setImagePreview(
         editingBanner.BannerImage
-          ? `${backendUrl}${editingBanner.BannerImage}`
+          ? `${backendUrl}/images/banners/${editingBanner.BannerImage}`
           : null
       );
     } else {

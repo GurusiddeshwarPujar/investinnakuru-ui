@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { ListIcon, PageIcon, SettingIcon, UserCircleIcon,BoxCubeIcon,CalenderIcon } from "../../../icons/index";
+import { ListIcon, PageIcon, SettingIcon, UserCircleIcon,BoxCubeIcon,CalenderIcon,DocsIcon } from "../../../icons/index";
 
 // Helper: Get cookie
 const getCookie = (name: string) => {
@@ -21,6 +21,7 @@ export default function Dashboard() {
   const [newsCount,setNewsCount]=useState<number>(0);
   const [newsletterCount,setnewsletterCount]=useState<number>(0);
   const [eventsCount,seteventsCount]=useState<number>(0);
+  const [bannerCount,setbannerCount]=useState<number>(0);
 
   const fetchContactCount = async () => {
     try {
@@ -110,12 +111,30 @@ export default function Dashboard() {
     }
   }
 
+  const fetchBanner =async ()=>{
+    try{
+      const token=getCookie("authToken");
+      const res =await fetch(`${backendUrl}/api/admin/banners`,{
+        headers:{"x-auth-token":token || ""},
+      });
+
+
+      if(!res.ok) throw new Error("Failed to fetch banner.");
+      const data=await res.json();
+      setbannerCount(data.length || 0);
+    }catch(err){
+      console.error(err);
+      setbannerCount(0);
+    }
+  }
+
   useEffect(() => {
     fetchContactCount();
     fetchCategoryCount();
     fetchNewsCount();
     fetchNewsletterSubscriber();
     fetchEvents();
+    fetchBanner();
   }, []);
 
   return (
@@ -168,8 +187,29 @@ export default function Dashboard() {
     </div>
   </Link>
 </div>
-      
-      <div className="col-span-12 sm:col-span-4">
+<div className="col-span-12 sm:col-span-4">
+        <Link href="/admin/news">
+          <div className="flex items-center justify-between gap-4 p-5 rounded-2xl shadow-md bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+            <div className="flex items-center gap-4">
+              <span className="w-10 h-10 flex items-center justify-center rounded-full bg-yellow-100 dark:bg-yellow-900 text-yellow-600">
+                <BoxCubeIcon />
+              </span>
+              <div className="flex flex-col">
+                <span className="font-semibold text-gray-800 dark:text-gray-200">
+                  Manage News Articles
+                </span>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Total news articles
+                </span>
+              </div>
+            </div>
+            <span className="px-3 py-1 text-sm font-bold rounded-full bg-yellow-100 text-yellow-700 dark:bg-yellow-800 dark:text-yellow-100">
+              {newsCount}
+            </span>
+          </div>
+        </Link>
+      </div>
+       <div className="col-span-12 sm:col-span-4">
         <Link href="/admin/contact-us">
           <div className="flex items-center justify-between gap-4 p-5 rounded-2xl shadow-md bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
             <div className="flex items-center gap-4">
@@ -191,25 +231,35 @@ export default function Dashboard() {
           </div>
         </Link>
       </div>
-
       <div className="col-span-12 sm:col-span-4">
-        <Link href="/admin/news">
+        <Link href="/admin/banner">
           <div className="flex items-center justify-between gap-4 p-5 rounded-2xl shadow-md bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
             <div className="flex items-center gap-4">
-              <span className="w-10 h-10 flex items-center justify-center rounded-full bg-yellow-100 dark:bg-yellow-900 text-yellow-600">
-                <BoxCubeIcon />
+              {/* Changed from blue to teal */}
+              <span className="w-10 h-10 flex items-center justify-center rounded-full bg-orange-100 dark:bg-orange-900 text-orange-600">
+                <DocsIcon />
               </span>
               <div className="flex flex-col">
                 <span className="font-semibold text-gray-800 dark:text-gray-200">
-                  Manage News Articles
-                </span>
-                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Total news articles
+                  Manage Banner
                 </span>
               </div>
             </div>
-            <span className="px-3 py-1 text-sm font-bold rounded-full bg-yellow-100 text-yellow-700 dark:bg-yellow-800 dark:text-yellow-100">
-              {newsCount}
+            {/* Changed from blue to teal */}
+          <span className="px-3 py-1 text-sm font-bold rounded-full bg-orange-100 text-orange-700 dark:bg-orange-800 dark:text-orange-100">
+            {bannerCount}
+          </span>
+          </div>
+        </Link>
+      </div>
+      <div className="col-span-12 sm:col-span-4">
+        <Link href="/admin/cms">
+          <div className="flex items-center gap-4 p-5 rounded-2xl shadow-md bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+            <span className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600">
+              <PageIcon />
+            </span>
+            <span className="font-semibold text-gray-800 dark:text-gray-200">
+              CMS
             </span>
           </div>
         </Link>
@@ -240,18 +290,7 @@ export default function Dashboard() {
       
 
       {/* CMS Widget */}
-      <div className="col-span-12 sm:col-span-4">
-        <Link href="/admin/cms">
-          <div className="flex items-center gap-4 p-5 rounded-2xl shadow-md bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
-            <span className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600">
-              <PageIcon />
-            </span>
-            <span className="font-semibold text-gray-800 dark:text-gray-200">
-              CMS
-            </span>
-          </div>
-        </Link>
-      </div>
+      
 
       {/* Settings Widget */}
       <div className="col-span-12 sm:col-span-4">

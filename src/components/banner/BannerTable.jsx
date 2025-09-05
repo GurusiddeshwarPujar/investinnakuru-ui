@@ -93,7 +93,7 @@ export default function BannerTable({
                   <td className="px-6 py-4">
                     {banner.BannerImage ? (
                       <img
-                        src={`${backendUrl}${banner.BannerImage}`}
+                        src={`${backendUrl}/images/banners/${banner.BannerImage}`}
                         alt="Banner"
                         className="w-32 h-auto rounded-lg shadow-md"
                       />
@@ -187,7 +187,7 @@ export default function BannerTable({
               {selectedBanner.BannerImage && (
                 <div className="p-4">
                   <img
-                    src={`${backendUrl}${selectedBanner.BannerImage}`}
+                    src={`${backendUrl}/images/banners/${selectedBanner.BannerImage}`}
                     alt="Banner"
                     className="w-full h-auto rounded-lg shadow-md"
                   />

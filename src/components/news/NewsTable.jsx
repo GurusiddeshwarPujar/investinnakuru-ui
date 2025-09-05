@@ -111,7 +111,7 @@ export default function NewsTable({
                     <div className="w-16 h-16 flex-shrink-0 flex items-center justify-center">
                     {article.Image && (
                       <img
-                        src={`${backendUrl}${article.Image}`}
+                        src={`${backendUrl}/images/news/${article.Image}`}
                         alt={article.NewsTitle}
                         className="object-cover rounded-lg"
                       />
@@ -199,7 +199,7 @@ export default function NewsTable({
         {selectedNews.Image && (
           <div className="p-4">
             <img
-              src={`${backendUrl}${selectedNews.Image}`}
+              src={`${backendUrl}/images/news/${selectedNews.Image}`}
               alt={selectedNews.NewsTitle}
               className="w-full h-auto rounded-lg shadow-md"
             />
