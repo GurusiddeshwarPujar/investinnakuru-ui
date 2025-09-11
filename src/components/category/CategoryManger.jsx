@@ -36,7 +36,7 @@ export default function CategoryManager() {
       }
 
       if (!res.ok) {
-        throw new Error("Failed to fetch categories.");
+        throw new Error("Failed to fetch key sectors.");
       }
 
       const data = await res.json();
@@ -63,7 +63,7 @@ export default function CategoryManager() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-48">
-        <p>Loading categories...</p>
+        <p>Loading key sectors...</p>
       </div>
     );
   }
@@ -85,11 +85,11 @@ export default function CategoryManager() {
         editingCategory={editingCategory}
         setEditingCategory={setEditingCategory}
         onCategoryAdded={() => {
-          setStatus("Category added successfully!");
+          setStatus("Key sector added successfully!");
           fetchCategories();
         }}
         onCategoryUpdated={() => {
-          setStatus("Category updated successfully!");
+          setStatus("Key sector updated successfully!");
           setEditingCategory(null);
           fetchCategories();
         }}
@@ -101,7 +101,7 @@ export default function CategoryManager() {
           categories={categories}
           onEditClick={setEditingCategory}
           onCategoryDeleted={() => {
-            setStatus("Category deleted successfully!");
+            setStatus("Key sector deleted successfully!");
             fetchCategories();
           }}
           onError={(message) => setStatus(message)}

@@ -30,7 +30,7 @@ const navItems = [
     // subItems: [{ name: "Ecommerce", path: "/admin", pro: false }],
   },
   {
-    name:"Manage Categories",
+    name:"Manage Key Sectors",
     icon :<ListIcon/>,
     path:"/admin/category",
   },

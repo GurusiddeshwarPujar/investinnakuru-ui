@@ -149,10 +149,10 @@ export default function Dashboard() {
               </span>
               <div className="flex flex-col">
                 <span className="font-semibold text-gray-800 dark:text-gray-200">
-                  Categories
+                  Key Sectors
                 </span>
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Total categories
+                  Total Key Sectors
                 </span>
               </div>
             </div>
