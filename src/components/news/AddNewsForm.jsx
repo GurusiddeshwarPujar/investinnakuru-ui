@@ -14,6 +14,36 @@ const generateUrlSlug = (title = "") => {
     .replace(/--+/g, "-");
 };
 
+const editorHeader = (
+  <span className="ql-formats">
+    <select className="ql-header" defaultValue="0">
+      <option value="1">Heading 1</option>
+      <option value="2">Heading 2</option>
+      <option value="3">Heading 3</option>
+      <option value="0">Normal</option>
+    </select>
+    <select className="ql-font" defaultValue="sans-serif">
+      <option value="sans-serif">Sans Serif</option>
+      <option value="serif">Serif</option>
+      <option value="monospace">Monospace</option>
+    </select>
+
+    <button className="ql-bold"></button>
+    <button className="ql-italic"></button>
+    <button className="ql-underline"></button>
+    <select className="ql-color"></select>
+    <select className="ql-background"></select>
+    <button className="ql-list" value="ordered"></button>
+    <button className="ql-list" value="bullet"></button>
+    <select className="ql-align"></select>
+    <button className="ql-link"></button>
+    <button className="ql-image"></button>
+    <button className="ql-clean"></button>
+  </span>
+);
+
+
+
 export default function AddNewsForm({
   backendUrl,
   authToken,
@@ -36,6 +66,7 @@ export default function AddNewsForm({
     defaultValues: {
       CatId: "",
       NewsTitle: "",
+      NewsShortDescription: "",
       NewsDescription: "",
       Image: null,
     },
@@ -57,6 +88,7 @@ export default function AddNewsForm({
       reset({
         CatId: editingNews.CatId,
         NewsTitle: editingNews.NewsTitle,
+        NewsShortDescription: editingNews.NewsShortDescription,
         NewsDescription: editingNews.NewsDescription,
         Image: null,
       });
@@ -187,17 +219,47 @@ export default function AddNewsForm({
           />
         </div>
 
+        {/* Short Description */}
+      <div>
+        <label
+          htmlFor="newsShortDescription"
+          className="block mb-2 text-sm font-medium"
+        >
+          Short Description
+        </label>
+        <textarea
+          id="newsShortDescription"
+          rows={3}
+          {...register("NewsShortDescription", {
+            required: "Please enter a short description.",
+            validate: (value) =>
+              value.trim().length >= 10 ||
+              "Short description must be at least 10 characters long.",
+          })}
+          className="block w-full rounded-lg border border-gray-300 p-2.5 text-sm"
+        />
+        {errors.NewsShortDescription && (
+          <p className="mt-2 text-sm text-red-600">
+            {errors.NewsShortDescription.message}
+          </p>
+        )}
+      </div>
+
+
+
         {/* Description */}
         <div>
           <label htmlFor="newsDescription" className="block mb-2 text-sm font-medium">
             Description
           </label>
           <Editor
+            headerTemplate={editorHeader}
             value={newsDescription}
             onTextChange={(e) =>
               reset({ ...watch(), NewsDescription: e.htmlValue })
             }
             style={{ height: "320px" }}
+              
           />
           <input
             type="hidden"

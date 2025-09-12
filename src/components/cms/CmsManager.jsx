@@ -23,12 +23,40 @@ export default function CmsManager() {
 
   const { authToken } = parseCookies();
 
+    const editorHeader = (
+  <span className="ql-formats">
+    <select className="ql-header" defaultValue="0">
+      <option value="1">Heading 1</option>
+      <option value="2">Heading 2</option>
+      <option value="3">Heading 3</option>
+      <option value="0">Normal</option>
+    </select>
+    <select className="ql-font" defaultValue="sans-serif">
+      <option value="sans-serif">Sans Serif</option>
+      <option value="serif">Serif</option>
+      <option value="monospace">Monospace</option>
+    </select>
+
+    <button className="ql-bold"></button>
+    <button className="ql-italic"></button>
+    <button className="ql-underline"></button>
+    <select className="ql-color"></select>
+    <select className="ql-background"></select>
+    <button className="ql-list" value="ordered"></button>
+    <button className="ql-list" value="bullet"></button>
+    <select className="ql-align"></select>
+    <button className="ql-link"></button>
+    <button className="ql-image"></button>
+    <button className="ql-clean"></button>
+  </span>
+);
   // 🔹 Handle token expiry
   const handleAuthError = () => {
     destroyCookie(null, "authToken");
     router.push("/login");
   };
 
+  
   // Fetch all CMS pages
   const fetchCmsPages = async () => {
     try {
@@ -205,6 +233,7 @@ export default function CmsManager() {
             <div className="text-center text-gray-500 dark:text-gray-400">Loading content...</div>
           ) : (
             <Editor
+              headerTemplate={editorHeader}
               key={selectedPage} // Forces a re-render when the page changes
               value={content}
               onTextChange={(e) => setContent(e.htmlValue)}

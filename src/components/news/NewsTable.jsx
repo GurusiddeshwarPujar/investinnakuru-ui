@@ -238,6 +238,11 @@ export default function NewsTable({
           </div>
         </div>
 
+         <div className="px-4 py-2">
+          <span className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Short Description:</span>
+          <div className="prose dark:prose-invert max-w-none text-gray-900 dark:text-white" dangerouslySetInnerHTML={{ __html: selectedNews.NewsShortDescription }} />
+        </div>
+
         {/* Full Article */}
         <div className="px-4 py-2">
           <span className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Description:</span>
