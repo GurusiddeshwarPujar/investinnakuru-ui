@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { ListIcon, PageIcon, SettingIcon, UserCircleIcon,BoxCubeIcon,CalenderIcon,DocsIcon } from "../../../icons/index";
+import { ListIcon, PageIcon, SettingIcon, UserCircleIcon,BoxCubeIcon,DocsIcon } from "../../../icons/index";
 
 
 const getCookie = (name: string) => {
