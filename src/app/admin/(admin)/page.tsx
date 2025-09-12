@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ListIcon, PageIcon, SettingIcon, UserCircleIcon,BoxCubeIcon,CalenderIcon,DocsIcon } from "../../../icons/index";
 
-// Helper: Get cookie
+
 const getCookie = (name: string) => {
   if (typeof document === "undefined") return null;
   const value = `; ${document.cookie}`;
@@ -20,7 +20,7 @@ export default function Dashboard() {
   const [categoryCount,setCategoryCount] = useState<number>(0);
   const [newsCount,setNewsCount]=useState<number>(0);
   const [newsletterCount,setnewsletterCount]=useState<number>(0);
-  const [eventsCount,seteventsCount]=useState<number>(0);
+
   const [bannerCount,setbannerCount]=useState<number>(0);
 
   const fetchContactCount = async () => {
@@ -95,22 +95,6 @@ export default function Dashboard() {
     }
   }
 
-  const fetchEvents=async ()=>{
-    try{
-      const token =getCookie("authToken");
-      const res =await fetch(`${backendUrl}/api/events`,{
-        headers:{"x-auth-token":token || ""},
-      });
-
-      if(!res.ok) throw new Error("Failed to fetch events.");
-      const data=await res.json();
-      seteventsCount(data.length || 0);
-    }catch(err){
-        console.error(err);
-      seteventsCount(0);
-    }
-  }
-
   const fetchBanner =async ()=>{
     try{
       const token=getCookie("authToken");
@@ -133,7 +117,6 @@ export default function Dashboard() {
     fetchCategoryCount();
     fetchNewsCount();
     fetchNewsletterSubscriber();
-    fetchEvents();
     fetchBanner();
   }, []);
 
@@ -163,30 +146,7 @@ export default function Dashboard() {
         </Link>
       </div>
 
- <div className="col-span-12 sm:col-span-4">
-  <Link href="/admin/events">
-    <div className="flex items-center justify-between gap-4 p-5 rounded-2xl shadow-md bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
-      <div className="flex items-center gap-4">
-        {/* Changed from blue to teal */}
-        <span className="w-10 h-10 flex items-center justify-center rounded-full bg-teal-100 dark:bg-teal-900 text-teal-600">
-          <CalenderIcon />
-        </span>
-        <div className="flex flex-col">
-          <span className="font-semibold text-gray-800 dark:text-gray-200">
-            Manage Events
-          </span>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Total events
-          </span>
-        </div>
-      </div>
-      {/* Changed from blue to teal */}
-      <span className="px-3 py-1 text-sm font-bold rounded-full bg-teal-100 text-teal-700 dark:bg-teal-800 dark:text-teal-100">
-        {eventsCount}
-      </span>
-    </div>
-  </Link>
-</div>
+
 <div className="col-span-12 sm:col-span-4">
         <Link href="/admin/news">
           <div className="flex items-center justify-between gap-4 p-5 rounded-2xl shadow-md bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">

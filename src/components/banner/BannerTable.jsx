@@ -193,6 +193,17 @@ export default function BannerTable({
                   />
                 </div>
               )}
+            {selectedBanner.BannerTitle && (   
+                  <div className="p-4 space-y-3">
+                    <div className="flex justify-between">
+                      <span className="font-medium text-gray-700 dark:text-gray-300">Title:</span>
+                      <span className="text-gray-900 dark:text-white text-right">
+                        {selectedBanner.BannerTitle}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
               <div className="p-4 space-y-3">
                 <div className="flex justify-between">
                   <span className="font-medium text-gray-700 dark:text-gray-300">

@@ -35,11 +35,6 @@ const navItems = [
     path:"/admin/category",
   },
   {
-    icon:  <CalenderIcon />,
-    name: "Manage Events",
-    path: "/admin/events",
-  },
-  {
     icon:  <BoxCubeIcon />,
     name: "Manage News",
     path: "/admin/news",

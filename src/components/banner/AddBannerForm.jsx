@@ -23,6 +23,7 @@ export default function AddBannerForm({
     formState: { isSubmitting, errors },
   } = useForm({
     defaultValues: {
+      BannerTitle: "",
       BannerImage: null,
     },
   });
@@ -30,10 +31,10 @@ export default function AddBannerForm({
   const [imagePreview, setImagePreview] = useState(null);
   const imageFile = watch("BannerImage");
 
-  // Populate form if editing
+ 
   useEffect(() => {
     if (editingBanner) {
-      reset({ BannerImage: null });
+      reset({  BannerTitle: editingBanner.BannerTitle || "", BannerImage: null });
       setImagePreview(
         editingBanner.BannerImage
           ? `${backendUrl}/images/banners/${editingBanner.BannerImage}`
@@ -45,7 +46,7 @@ export default function AddBannerForm({
     }
   }, [editingBanner, reset, backendUrl, setValue]);
 
-  // Show preview when user selects image
+
   useEffect(() => {
     if (imageFile && imageFile[0]) {
       const url = URL.createObjectURL(imageFile[0]);
@@ -57,7 +58,11 @@ export default function AddBannerForm({
   const handleFormSubmit = async (data) => {
     const formData = new FormData();
 
-    // Append only image
+    if (data.BannerTitle) {
+      formData.append("BannerTitle", data.BannerTitle);
+    }
+
+   
     if (data.BannerImage && data.BannerImage[0]) {
       formData.append("BannerImage", data.BannerImage[0]);
     }
@@ -106,7 +111,20 @@ export default function AddBannerForm({
         className="space-y-4 mt-4"
         encType="multipart/form-data"
       >
-        {/* Banner Image Upload */}
+
+        <div>
+          <label htmlFor="bannerTitle" className="block mb-2 text-sm font-medium">
+            Banner Title (Optional)
+          </label>
+          <input
+            type="text"
+            id="bannerTitle"
+            {...register("BannerTitle")}
+            placeholder="Enter banner title"
+            className="block w-full rounded-lg border border-gray-300 p-2.5 text-sm"
+          />
+        </div>
+       
         <div>
           <label htmlFor="bannerImage" className="block mb-2 text-sm font-medium">
             Banner Image
@@ -146,7 +164,7 @@ export default function AddBannerForm({
           )}
         </div>
 
-        {/* Buttons */}
+     
         <div className="flex space-x-2">
           <button
             type="submit"
