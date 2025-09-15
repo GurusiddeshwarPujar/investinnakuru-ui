@@ -12,8 +12,9 @@ import {
   ListIcon,
   PageIcon,
   UserCircleIcon,
-DocsIcon,
+  DocsIcon,
   SettingIcon,
+  ChatIcon,
 
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
@@ -34,6 +35,11 @@ const navItems = [
     icon:  <BoxCubeIcon />,
     name: "Manage News",
     path: "/admin/news",
+  },
+    {
+    icon:  <ChatIcon />,
+    name: "Manage Testimonials",
+    path: "/admin/testimonials",
   },
   {
     name: "Contacts Received",
@@ -60,6 +66,7 @@ const navItems = [
     name: "Settings",
     path: "/admin/settings",
   },
+
 
 
   

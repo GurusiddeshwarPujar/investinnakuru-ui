@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { ListIcon, PageIcon, SettingIcon, UserCircleIcon,BoxCubeIcon,DocsIcon } from "../../../icons/index";
+import { ListIcon, PageIcon, SettingIcon, UserCircleIcon,BoxCubeIcon,DocsIcon,ChatIcon } from "../../../icons/index";
 
 
 const getCookie = (name: string) => {
@@ -20,8 +20,8 @@ export default function Dashboard() {
   const [categoryCount,setCategoryCount] = useState<number>(0);
   const [newsCount,setNewsCount]=useState<number>(0);
   const [newsletterCount,setnewsletterCount]=useState<number>(0);
-
   const [bannerCount,setbannerCount]=useState<number>(0);
+  const [testimonialCount,settestimonialCount]=useState<number>(0);
 
   const fetchContactCount = async () => {
     try {
@@ -111,6 +111,23 @@ export default function Dashboard() {
       setbannerCount(0);
     }
   }
+ const fetchTestimonial =async ()=>{
+    try{
+      const token=getCookie("authToken");
+      const res =await fetch(`${backendUrl}/api/testimonials`,{
+        headers:{"x-auth-token":token || ""},
+      });
+
+      if(!res.ok) throw new Error("Failed to fetch testimonials.");
+      const data=await res.json();
+      settestimonialCount(data.length || 0);
+    }catch(err){
+      console.error(err);
+      settestimonialCount(0);
+    }
+  }
+
+
 
   useEffect(() => {
     fetchContactCount();
@@ -118,6 +135,7 @@ export default function Dashboard() {
     fetchNewsCount();
     fetchNewsletterSubscriber();
     fetchBanner();
+    fetchTestimonial();
   }, []);
 
   return (
@@ -147,7 +165,7 @@ export default function Dashboard() {
       </div>
 
 
-<div className="col-span-12 sm:col-span-4">
+      <div className="col-span-12 sm:col-span-4">
         <Link href="/admin/news">
           <div className="flex items-center justify-between gap-4 p-5 rounded-2xl shadow-md bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
             <div className="flex items-center gap-4">
@@ -169,6 +187,28 @@ export default function Dashboard() {
           </div>
         </Link>
       </div>
+            <div className="col-span-12 sm:col-span-4">
+        <Link href="/admin/testimonials">
+          <div className="flex items-center justify-between gap-4 p-5 rounded-2xl shadow-md bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+            <div className="flex items-center gap-4">
+              {/* Changed from blue to teal */}
+              <span className="w-10 h-10 flex items-center justify-center rounded-full bg-green-100 dark:bg-green-900 text-green-600">
+                <ChatIcon />
+              </span>
+              <div className="flex flex-col">
+                <span className="font-semibold text-gray-800 dark:text-gray-200">
+                  Manage Testimonials
+                </span>
+              </div>
+            </div>
+            {/* Changed from blue to teal */}
+          <span className="px-3 py-1 text-sm font-bold rounded-full bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-100">
+            {testimonialCount}
+          </span>
+          </div>
+        </Link>
+      </div>
+
        <div className="col-span-12 sm:col-span-4">
         <Link href="/admin/contact-us">
           <div className="flex items-center justify-between gap-4 p-5 rounded-2xl shadow-md bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
