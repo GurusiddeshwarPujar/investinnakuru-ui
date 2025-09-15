@@ -1,9 +1,8 @@
 // AboutSection component generated from Figma design
 import React from "react";
 
-const imgImage13 = "/images/about-image13.png";
-const imgImage12 = "/images/about-image12.png";
-const imgImage14 = "/images/about-image14.svg";
+const imgImage13 = "/images/home/image-13.jpg";
+const imgImage12 = "/images/home/image-12.jpg";
 
 export default function AboutSection() {
   return (
@@ -46,7 +45,7 @@ export default function AboutSection() {
           <p className="text-[18px] text-black leading-[30px] mb-2">
             Whether your interests lie in geothermal energy, agroprocessing, healthcare, tourism, real estate, or infrastructure, Nakuru offers a unique blend of opportunity and impact—where your capital doesn’t just grow, it transforms communities.
           </p>
-          <button className="bg-black text-white px-8 py-3 rounded font-bold text-[16px] w-fit self-start">Read More About us</button>
+          <button className="bg-gradient-to-r from-[#EB3A2A] to-[#F29D3F] text-white px-6 py-2 rounded text-[18px] font-bold text-[16px] w-fit self-start">Read More About us</button>
         </div>
       </div>
     </section>

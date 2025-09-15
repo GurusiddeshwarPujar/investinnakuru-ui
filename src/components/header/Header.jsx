@@ -1,30 +1,46 @@
-// Header component generated from Figma design
 import React from "react";
 
-const imgLogo = "http://localhost:3845/assets/469d1368d82c6579c05c71e81b0a465175cadc4b.png";
+const imgLogo = "/images/home/logo.png";
 
 export default function Header() {
   return (
-    <header className="relative w-full">
-      {/* Top Bar */}
-      <div className="bg-[#006600] h-[50px] w-full flex items-center justify-center">
-        <span className="text-white text-center text-[16px] whitespace-nowrap">
-          Why Nakuru   |   About Us   |   Incentives & Support   |   Success Stories   |   News & Events
-        </span>
+    <header className="w-full">
+      {/* Top Green Bar */}
+      <div className="bg-[#006600] h-[50px] flex items-center justify-center">
+        <nav className="flex items-center space-x-6 text-white text-[16px]">
+          <span>Why Nakuru</span>
+          <span>|</span>
+          <span>About Us</span>
+          <span>|</span>
+          <span>Incentives & Support</span>
+          <span>|</span>
+          <span>Success Stories</span>
+          <span>|</span>
+          <span>News & Events</span>
+        </nav>
       </div>
-      {/* Main Header */}
-      <div className="bg-white h-[90px] w-full flex items-center justify-between px-[135px]" style={{ minWidth: "127px" }}>
+
+      {/* Main Header Section */}
+      <div className="bg-white h-[90px] flex items-center justify-between px-[120px]">
         {/* Logo */}
-        <div className="flex items-center h-[70px] w-[127px] bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url('${imgLogo}')` }} />
-        {/* Navigation Links */}
-        <nav className="flex gap-8 text-black text-[18px] font-bold">
+        <div
+          className="h-[70px] w-[130px] bg-center bg-contain bg-no-repeat"
+          style={{ backgroundImage: `url('${imgLogo}')` }}
+        />
+
+        {/* Center Navigation */}
+        <nav className="flex items-center space-x-14 text-black text-[18px] font-bold">
           <span>Investment Opportunities</span>
           <span>Diaspora Engagement</span>
           <span>Key Sectors</span>
         </nav>
+
         {/* Contact Us Button */}
-        <button className="bg-[#006600] text-white px-6 py-2 rounded text-[18px] font-bold">Contact Us</button>
+        <button className="bg-gradient-to-r from-[#EB3A2A] to-[#F29D3F] text-white px-6 py-2 rounded text-[18px] font-bold">
+          Contact Us
+        </button>
       </div>
     </header>
   );
 }
+

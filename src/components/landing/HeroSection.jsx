@@ -1,9 +1,9 @@
 // HeroSection component generated from Figma design
 import React from "react";
 
-const imgImage10 = "http://localhost:3845/assets/de1e20a25df930f87b04cd19acbd33b6d8d5c19f.png";
-const imgImage11 = "http://localhost:3845/assets/b52481c00c3e554086aa745a096344d27fddb4b8.svg";
-const imgSlideBullets = "http://localhost:3845/assets/c4dfe4d08d309b457c0587613ef25047e88e0e3b.svg";
+const imgImage10 = "/images/home/image-10.jpg";
+const imgImage11 = "/images/home/image-12.jpg";
+const imgSlideBullets = "/images/success-slide-bullets.svg";
 const imgLeftArrow = "/images/hero-left-arrow.svg";
 const imgRightArrow = "/images/hero-right-arrow.svg";
 

@@ -19,7 +19,7 @@ export default function NewsTable({
   const [selectedNews, setSelectedNews] = useState(null);
 
   const handleDelete = async (newsId) => {
-    if (window.confirm("Are you sure you want to delete this news article?")) {
+    if (window.confirm("Are you sure you want to delete this news article and events?")) {
       try {
         const res = await fetch(`${backendUrl}/api/admin/news/${newsId}`, {
           method: "DELETE",
@@ -61,7 +61,7 @@ export default function NewsTable({
 
   return (
     <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4">
-      <h2 className="text-2xl font-bold mb-4">List of News Articles</h2>
+      <h2 className="text-2xl font-bold mb-4">List of News Articles & Events</h2>
       {/* Filter and Pagination Controls */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
         <select
@@ -77,7 +77,7 @@ export default function NewsTable({
         </select>
         <input
           type="text"
-          placeholder="Search news..."
+          placeholder="Search news and events..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="border px-3 py-2 rounded-lg w-full md:w-1/3"
@@ -190,7 +190,7 @@ export default function NewsTable({
   <div className="fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70 overflow-y-auto">
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-3xl w-full mx-4">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white">News Details</h3>
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white">News & Events Details</h3>
       </div>
       
       {/* Scrollable Content Area */}

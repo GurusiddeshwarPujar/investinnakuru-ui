@@ -38,7 +38,7 @@ export default function WhyInvestSection() {
         <p className="text-[20px] text-black leading-[30px] mb-0">&nbsp;</p>
         <p className="text-[20px] text-black leading-[30px]">Because when you invest in Nakuru, you're not just growing a business—you're building the future of Kenya.</p>
       </div>
-      <button className="bg-black text-white px-8 py-3 rounded font-bold text-[18px]">Invest Now</button>
+      <button className="bg-gradient-to-r from-[#EB3A2A] to-[#F29D3F] text-white px-6 py-2 rounded text-[18px] font-bold text-[16px]">Invest Now</button>
     </section>
   );
 }

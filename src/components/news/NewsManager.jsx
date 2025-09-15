@@ -52,7 +52,7 @@ export default function NewsManager() {
         handleAuthError();
         return;
       }
-      if (!res.ok) throw new Error("Failed to fetch news.");
+      if (!res.ok) throw new Error("Failed to fetch news and events.");
       const data = await res.json();
       setNews(data);
     } catch (err) {
@@ -95,7 +95,7 @@ export default function NewsManager() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-48">
-        <p>Loading news...</p>
+        <p>Loading news and events...</p>
       </div>
     );
   }
@@ -115,13 +115,13 @@ export default function NewsManager() {
       {view === 'list' ? (
         <>
           <div className="flex justify-end mb-4">
-            <Button onClick={handleAddClick}>Add News Article</Button>
+            <Button onClick={handleAddClick}>Add News Article & Events</Button>
           </div>
           <NewsTable
             news={news}
             onEditClick={handleEditClick}
             onNewsDeleted={() => {
-              setStatus("News article deleted successfully!");
+              setStatus("News article and events deleted successfully!");
               fetchNews();
             }}
             onError={(message) => setStatus(message)}
@@ -136,11 +136,11 @@ export default function NewsManager() {
           editingNews={editingNews}
           setEditingNews={setEditingNews}
           onNewsAdded={() => {
-            setStatus("News article added successfully!");
+            setStatus("News article and events added successfully!");
             handleBackToList();
           }}
           onNewsUpdated={() => {
-            setStatus("News article updated successfully!");
+            setStatus("News article and events updated successfully!");
             handleBackToList();
           }}
           onError={(message) => setStatus(message)}

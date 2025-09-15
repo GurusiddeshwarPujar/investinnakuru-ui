@@ -1,13 +1,17 @@
 // Footer component generated from Figma design
 import React from "react";
 
-const socialIcons = "/images/footer-social-icons.svg";
+const socialIcons = "/images/home/Vector-1.png";
+const linkdin="/images/home/Vector-2.png";
+const youtube="/images/home/Vector-3.png";
+const insta ="/images/home/Vector-4.png";
+const facebook="/images/home/Vector.png";
 const icon = "/images/footer-icon.svg";
 const icon1 = "/images/footer-icon1.svg";
 
 export default function Footer() {
   return (
-    <footer className="relative w-full bg-black pt-16 pb-8 text-white">
+    <footer className="relative w-full bg-[#000] pt-16 pb-8 text-white">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 px-4">
         {/* Useful Links */}
         <div>
@@ -34,12 +38,12 @@ export default function Footer() {
         {/* Contact Info */}
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3 mb-2">
-            <img src={icon} alt="Email Icon" className="w-[32px] h-[32px]" />
+            <img src={icon} alt="Email Icon" className="w-[54px] h-[54px]" />
             <span className="uppercase font-bold text-[16px]">Email us at:</span>
           </div>
           <span className="font-bold text-[32px]">diaspora@investinnakuru.com</span>
           <div className="flex items-center gap-3 mb-2 mt-4">
-            <img src={icon1} alt="WhatsApp Icon" className="w-[32px] h-[32px]" />
+            <img src={icon1} alt="WhatsApp Icon" className="w-[54px] h-[54px]" />
             <span className="uppercase font-bold text-[16px]">WhatsApp:</span>
           </div>
           <span className="font-bold text-[32px]">+254 712 000 000</span>
@@ -48,11 +52,21 @@ export default function Footer() {
       {/* Divider */}
       <div className="w-full max-w-6xl mx-auto h-px bg-white opacity-20 my-8" />
       {/* Bottom Row */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-4">
-        <span className="text-[16px]">© 2025 Invest In Nakuru. All Rights Reserved</span>
-        <span className="text-[16px] text-center">Terms & Conditions  |  Privacy Policy</span>
-        <img src={socialIcons} alt="Social Icons" className="h-6" />
-      </div>
+     {/* Bottom Row */}
+<div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 gap-4">
+  <span className="text-[16px]">© 2025 Invest In Nakuru. All Rights Reserved</span>
+  <span className="text-[16px] text-center">Terms & Conditions  |  Privacy Policy</span>
+
+  {/* Social Icons */}
+  <div className="flex items-center gap-4">
+    <img src={facebook} alt="Facebook" className="h-6" />
+    <img src={socialIcons} alt="Twitter" className="h-6" />
+    <img src={linkdin} alt="LinkedIn" className="h-6" />
+    <img src={youtube} alt="YouTube" className="h-6" />
+    <img src={insta} alt="Instagram" className="h-6" />
+  </div>
+</div>
+
     </footer>
   );
 }

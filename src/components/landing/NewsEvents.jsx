@@ -8,7 +8,7 @@ const maskSvg = "/images/news-mask.svg";
 
 export default function NewsEvents() {
   return (
-    <section className="relative w-full bg-[#f7f7f7] py-24 flex flex-col items-center justify-center">
+    <section className="relative w-full bg-[#ffff] py-24 flex flex-col items-center justify-center">
       <h2 className="text-[48px] font-bold text-black text-center tracking-[-1.44px] mb-12">News & Events</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl mx-auto mb-12">
         {/* Card 1 */}
@@ -45,7 +45,7 @@ export default function NewsEvents() {
           </div>
         </div>
       </div>
-      <button className="bg-black text-white px-8 py-3 rounded font-bold text-[16px]">View All News</button>
+      <button className="bg-gradient-to-r from-[#EB3A2A] to-[#F29D3F] text-white px-6 py-2 rounded text-[18px] font-bold text-[16px]">View All News</button>
     </section>
   );
 }

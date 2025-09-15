@@ -163,7 +163,7 @@ export default function AddNewsForm({
   return (
     <div className="mb-6">
       <h2 className="text-2xl font-bold">
-        {editingNews ? "Update News Article" : "Add New News Article"}
+        {editingNews ? "Update News Article & Events" : "Add New News Article & Events"}
       </h2>
 
       <form
@@ -318,7 +318,7 @@ export default function AddNewsForm({
         {/* Buttons */}
         <div className="flex space-x-2">
           <Button type="submit" disabled={isSubmitting} className="mt-2">
-            {isSubmitting ? "Processing..." : editingNews ? "Update News" : "Add News"}
+            {isSubmitting ? "Processing..." : editingNews ? "Update News & Events" : "Add News & Events"}
           </Button>
           <Button
             type="button"

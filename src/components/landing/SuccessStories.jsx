@@ -1,8 +1,8 @@
 // SuccessStories component generated from Figma design
 import React from "react";
 
-const image25 = "/images/success-image25.png"; // Not downloaded due to 404
-const image24 = "/images/success-image24.png";
+const image25 = "/images/home/image-25.png"; 
+const image24 = "/images/home/image24.png";
 const slideBullets = "/images/success-slide-bullets.svg";
 const maskSvg = "/images/success-mask.svg";
 
@@ -25,9 +25,9 @@ export default function SuccessStories() {
         {/* Story 2 (image missing) */}
         <div className="flex flex-row items-center max-w-[500px]">
           <div className="relative w-[170px] h-[170px] mr-8 flex-shrink-0">
-            <div className="w-full h-full bg-gray-200 flex items-center justify-center rounded-full" style={{ WebkitMaskImage: `url('${maskSvg}')`, maskImage: `url('${maskSvg}')`, WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskSize: 'cover', maskSize: 'cover' }}>
-              <span className="text-gray-500">Image not found</span>
-            </div>
+             <div className="relative w-[170px] h-[170px] mr-8 flex-shrink-0">
+            <img src={image25} alt="Success Story 1" className="w-full h-full object-cover rounded-full" style={{ WebkitMaskImage: `url('${maskSvg}')`, maskImage: `url('${maskSvg}')`, WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskSize: 'cover', maskSize: 'cover' }} />
+          </div>
           </div>
           <div>
             <p className="text-[16px] text-black leading-[28px] mb-2">“Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s”</p>

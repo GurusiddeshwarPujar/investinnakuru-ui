@@ -33,7 +33,7 @@ const navItems = [
   },
   {
     icon:  <BoxCubeIcon />,
-    name: "Manage News",
+    name: "Manage News & Events",
     path: "/admin/news",
   },
     {
