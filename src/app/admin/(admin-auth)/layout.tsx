@@ -1,21 +1,16 @@
-// src/app/(admin-auth)/layout.tsx
-// This layout is specifically for admin authentication pages like login and signup.
-// It will NOT include the main admin dashboard header/sidebar components.
+import '../../globals.css'; 
 
-import '../../globals.css'; // Import global styles if needed for these pages
-// import { Inter } from 'next/font/google'; // Example font import if you use it
 
 import GridShape from "@/components/common/GridShape";
-import ThemeTogglerTwo from "@/components/common/ThemeTogglerTwo";
-import { ThemeProvider } from "@/context/ThemeContext"; // Assuming this is your context provider
+import { ThemeProvider } from "@/context/ThemeContext"; 
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-// const inter = Inter({ subsets: ['latin'] }); // Example font usage
+
 
 export const metadata = {
-  title: 'Admin Login', // Specific title for admin auth pages
+  title: 'Admin Login', 
   description: 'Admin authentication pages for your application.',
 };
 
