@@ -83,21 +83,28 @@ const AppHeader = () => {
             {/* Cross Icon */}
           </button>
 
-          <Link href="/" className="lg:hidden">
+          <Link href="/admin" className="lg:hidden flex items-center gap-3">
+           
             <Image
-              width={154}
-              height={32}
-              className="dark:hidden"
-              src="./images/logo/logo.svg"
+              width={20}
+              height={20}
+              className="dark:hidden object-contain"
+              src="/images/logo/logo.png"
               alt="Logo"
             />
+
+           
             <Image
-              width={154}
-              height={32}
-              className="hidden dark:block"
-              src="./images/logo/logo-dark.svg"
+              width={20}
+              height={20}
+              className="hidden dark:block object-contain"
+              src="/images/logo/logo.png"  
               alt="Logo"
             />
+
+            <span className="text-xl font-bold text-gray-900 dark:text-white leading-none">
+              Invest In Nakuru
+            </span>
           </Link>
 
           <button
@@ -162,7 +169,7 @@ const AppHeader = () => {
         >
           <div className="flex items-center gap-2 2xsm:gap-3">
      
-            <ThemeToggleButton />
+            {/* <ThemeToggleButton /> */}
        
             {/* <NotificationDropdown /> */}
             

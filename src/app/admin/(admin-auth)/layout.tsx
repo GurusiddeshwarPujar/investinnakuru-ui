@@ -33,24 +33,27 @@ export default function AdminAuthLayout({
             <div className="relative items-center justify-center flex z-1">
               {/* */}
               <GridShape />
-              <div className="flex flex-col items-center max-w-xs">
-                <Link href="/" className="block mb-4">
-                  <Image
-                    width={231}
-                    height={32}
-                    src="/images/logo/logonew.svg"
-                    alt="Logo"
-                  />
-                </Link>
-                <p className="text-center text-gray-400 dark:text-white/60">
-             
-                </p>
-              </div>
+             <div className="flex items-center max-w-xs">
+            <Link href="/admin" className="block mr-3">
+              <Image
+                width={40}
+                height={40}
+                src="/images/logo/logo.png"
+                alt="Logo"
+                className="object-contain"
+              />
+            </Link>
+
+            <p className="text-white text-xl font-bold">
+              Invest In Nakuru
+            </p>
+          </div>
+
             </div>
           </div>
-          <div className="fixed bottom-6 right-6 z-50 hidden sm:block">
+          {/* <div className="fixed bottom-6 right-6 z-50 hidden sm:block">
             <ThemeTogglerTwo />
-          </div>
+          </div> */}
         </div>
       </ThemeProvider>
     </div>

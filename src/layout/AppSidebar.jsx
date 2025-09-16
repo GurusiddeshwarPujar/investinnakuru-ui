@@ -315,22 +315,35 @@ const AppSidebar = () => {
           !isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
         }`}
       >
-        <Link href="/">
-          {isExpanded || isHovered || isMobileOpen ? (
-            <>
-              <p className="text-black dark:text-white text-lg font-bold hidden dark:block">
-                Invest In Nakuru
-              </p>
-              <p className="text-black dark:text-white text-lg font-bold dark:hidden">
-                Invest In Nakuru
-              </p>
-            </>
-          ) : (
-            <p className="text-black dark:text-white text-sm font-semibold">
-              Nakuru
-            </p>
-          )}
-        </Link>
+         <Link href="/admin" className="flex items-center gap-3">
+        {isExpanded || isHovered || isMobileOpen ? (
+          <>
+          
+            <Image
+              src="/images/logo/logo.png"
+              alt="Invest In Nakuru"
+              width={48} 
+              height={48}
+              className="object-contain"
+            />
+          
+            <span className="text-black dark:text-white text-xl font-bold leading-none">
+              Invest In Nakuru
+            </span>
+          </>
+        ) : (
+          <>
+          
+            <Image
+              src="/images/logo/logo.png"
+              alt="Invest In Nakuru"
+              width={48}
+              height={48}
+              className="object-contain"
+            />
+          </>
+        )}
+      </Link>
       </div>
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
         <nav className="mb-6">
