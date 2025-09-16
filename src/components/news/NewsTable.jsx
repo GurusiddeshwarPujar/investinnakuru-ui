@@ -90,9 +90,9 @@ export default function NewsTable({
           <thead className="text-xs uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th className="px-6 py-3"></th>
-              <th className="px-6 py-3">News Title</th>
-              <th className="px-6 py-3">Category</th>
-              <th className="px-6 py-3">URL</th>
+              <th className="px-6 py-3">Title</th>
+              <th className="px-6 py-3">Key Sector</th>
+              {/* <th className="px-6 py-3">URL</th> */}
               <th className="px-6 py-3">Created At</th>
               <th className="px-6 py-3">Actions</th>
             </tr>
@@ -100,7 +100,7 @@ export default function NewsTable({
           <tbody>
             {currentNews.length === 0 ? (
               <tr>
-                <td colSpan={6} className="text-center py-4">
+                <td colSpan={5} className="text-center py-4">
                   No news found
                 </td>
               </tr>
@@ -121,7 +121,7 @@ export default function NewsTable({
                   
                   <td className="px-4 py-3">{article.NewsTitle}</td>
                   <td className="px-4 py-3">{article.category.CatName}</td>
-                  <td className="px-4 py-3">{article.NewsURL}</td>
+                  {/* <td className="px-4 py-3">{article.NewsURL}</td> */}
                   <td className="px-4 py-3">
                     {new Date(article.createdAt) .toLocaleDateString("en-GB", {
                       day: "2-digit",
@@ -209,17 +209,17 @@ export default function NewsTable({
         {/* News Details */}
         <div className="p-4">
           <div className="flex justify-between items-center px-4 py-2">
-            <span className="font-medium text-gray-700 dark:text-gray-300">Category:</span>
+            <span className="font-medium text-gray-700 dark:text-gray-300">Key Sector:</span>
             <span className="text-gray-900 dark:text-white text-right">{selectedNews.category.CatName}</span>
           </div>
           <div className="flex justify-between items-center px-4 py-2">
             <span className="font-medium text-gray-700 dark:text-gray-300">Title:</span>
             {selectedNews.NewsTitle}
           </div>
-          <div className="flex justify-between items-center px-4 py-2">
+          {/* <div className="flex justify-between items-center px-4 py-2">
             <span className="font-medium text-gray-700 dark:text-gray-300">URL:</span>
             {selectedNews.NewsURL}
-          </div>
+          </div> */}
           <div className="flex justify-between items-center px-4 py-2">
             <span className="font-medium text-gray-700 dark:text-gray-300">Created At:</span>
             <span className="text-gray-900 dark:text-white text-right">{new Date(selectedNews.createdAt).toLocaleDateString("en-GB", {

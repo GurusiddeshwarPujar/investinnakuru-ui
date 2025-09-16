@@ -90,7 +90,7 @@ export default function CategoryTable({ categories, onEditClick, onCategoryDelet
             <tr>
               <th className="py-3 px-4 bg-gray-50 font-medium text-gray-600 text-left border-b"></th>
               <th className="py-3 px-4 bg-gray-50 font-medium text-gray-600 text-left border-b">Key Sector Name</th>
-              <th className="py-3 px-4 bg-gray-50 font-medium text-gray-600 text-left border-b">Key Sector URL</th>
+              {/* <th className="py-3 px-4 bg-gray-50 font-medium text-gray-600 text-left border-b">Key Sector URL</th> */}
               <th className="py-3 px-4 bg-gray-50 font-medium text-gray-600 text-left border-b">Created Date</th>
               <th className="py-3 px-4 bg-gray-50 font-medium text-gray-600 text-left border-b">Updated Date</th>
               <th className="py-3 px-4 bg-gray-50 font-medium text-gray-600 text-left border-b">Actions</th>
@@ -99,7 +99,7 @@ export default function CategoryTable({ categories, onEditClick, onCategoryDelet
           <tbody>
             {currentCategories.length === 0 ? (
               <tr>
-                <td colSpan={5} className="text-center py-4 text-gray-500">No key sectors found.</td>
+                <td colSpan={4} className="text-center py-4 text-gray-500">No key sectors found.</td>
               </tr>
             ) : (
               currentCategories.map((category) => (
@@ -117,7 +117,7 @@ export default function CategoryTable({ categories, onEditClick, onCategoryDelet
                   </td>
 
                   <td className="py-3 px-4 text-gray-800">{category.CatName}</td>
-                  <td className="py-3 px-4 text-gray-800">{category.CatURL}</td>
+                  {/* <td className="py-3 px-4 text-gray-800">{category.CatURL}</td> */}
                   <td className="py-3 px-4 text-gray-800">
                     {new Date(category.createdAt).toLocaleDateString("en-GB", {
                       day: "2-digit",

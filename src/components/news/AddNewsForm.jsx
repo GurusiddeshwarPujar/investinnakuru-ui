@@ -72,16 +72,16 @@ export default function AddNewsForm({
     },
   });
 
-  const [slug, setSlug] = useState("");
+  //const [slug, setSlug] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
 
   const newsTitle = watch("NewsTitle");
   const newsDescription = watch("NewsDescription");
   const imageFile = watch("Image");
 
-  useEffect(() => {
-    setSlug(generateUrlSlug(newsTitle));
-  }, [newsTitle]);
+  // useEffect(() => {
+  //   setSlug(generateUrlSlug(newsTitle));
+  // }, [newsTitle]);
 
   useEffect(() => {
     if (editingNews) {
@@ -92,11 +92,11 @@ export default function AddNewsForm({
         NewsDescription: editingNews.NewsDescription,
         Image: null,
       });
-      setSlug(editingNews.NewsURL);
+      //setSlug(editingNews.NewsURL);
       setImagePreview(editingNews.Image ? `${backendUrl}/images/news/${editingNews.Image}` : null);
     } else {
       reset();
-      setSlug("");
+      //setSlug("");
       setImagePreview(null);
     }
   }, [editingNews, reset, backendUrl]);
@@ -111,6 +111,8 @@ export default function AddNewsForm({
 
   const handleFormSubmit = async (data) => {
     const formData = new FormData();
+
+    const slug = generateUrlSlug(data.NewsTitle);
     formData.append("NewsURL", slug);
 
     for (const key in data) {
@@ -146,7 +148,7 @@ export default function AddNewsForm({
       editingNews ? onNewsUpdated() : onNewsAdded();
       reset();
       setEditingNews(null);
-      setSlug("");
+      //setSlug("");
       setImagePreview(null);
     } catch (err) {
       onError(err.message);
@@ -174,14 +176,14 @@ export default function AddNewsForm({
         {/* Category Dropdown */}
         <div>
           <label htmlFor="catId" className="block mb-2 text-sm font-medium">
-            Category
+            Key Sector
           </label>
           <select
             id="catId"
-            {...register("CatId", { required: "Please select a category." })}
+            {...register("CatId", { required: "Please select a key sector." })}
             className="block w-full rounded-lg border border-gray-300 p-2.5 text-sm"
           >
-            <option value="">-- Select Category --</option>
+            <option value="">-- Select Key Sector --</option>
             {categories.map((cat) => (
               <option key={cat.CatId} value={cat.CatId}>
                 {cat.CatName}
@@ -194,7 +196,7 @@ export default function AddNewsForm({
         {/* News Title */}
         <div>
           <label htmlFor="newsTitle" className="block mb-2 text-sm font-medium">
-            News Title
+           Title
           </label>
           <input
             type="text"
@@ -206,7 +208,7 @@ export default function AddNewsForm({
         </div>
 
         {/* News URL */}
-        <div>
+        {/* <div>
           <label htmlFor="newsUrl" className="block mb-2 text-sm font-medium">
             News URL
           </label>
@@ -217,7 +219,7 @@ export default function AddNewsForm({
             readOnly
             className="block w-full rounded-lg border border-gray-300 bg-gray-100 p-2.5 text-sm text-gray-500 cursor-not-allowed"
           />
-        </div>
+        </div> */}
 
         {/* Short Description */}
       <div>
