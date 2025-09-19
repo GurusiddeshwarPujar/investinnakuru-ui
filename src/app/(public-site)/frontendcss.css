@@ -1,0 +1,292 @@
+@import "tailwindcss";
+
+
+/******************GLOBAL FONTS***********************/
+
+@font-face {
+    font-family: 'Interstate';
+    src: url('/frontend/fonts/interstate/Interstate-Bold.woff2') format('woff2'),
+        url('/frontend/fonts/interstate/Interstate-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Interstate';
+    src: url('/frontend/fonts/interstate/Interstate-Regular.woff2') format('woff2'),
+        url('/frontend/fonts/interstate/Interstate-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Interstate';
+    src: url('/frontend/fonts/interstate/Interstate-Light.woff2') format('woff2'),
+        url('/frontend/fonts/interstate/Interstate-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/******************GLOBAL FONTS***********************/
+
+
+/******************GLOBAL VARIABLES***********************/
+
+:root {
+  --primary: #BB0000;
+  --secondary: #006600;
+  --black: #000000;
+  --white: #ffffff;
+  --btn-grad: linear-gradient(87.51deg, #EB3A2A 0%, #F29D3F 51%, #EB3A2A 100%);
+  --light-gray: #F7F7F7;
+  --border: #E8E8E8;
+  --trans: rgba(0, 0, 0, 0);
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-black: var(--black);
+  --color-white: var(--white);
+  --color-gray: var(--light-gray);
+  --color-border: var(--border);
+  --color-trans: var(--trans);
+  --background-image-btn-grad: var(--btn-grad);
+  --font-sans: var(--font-dm-sans);
+  --font-interstate: "Interstate", sans-serif;
+  --font-dm-sans: var(--font-dm-sans);
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/******************GLOBAL VARIABLES***********************/
+
+
+/******************GLOBAL COMPONENTS***********************/
+
+@layer components {
+  .btn {
+    @apply inline-block bg-btn-grad text-white font-normal font-interstate leading-5 px-6 py-3.5 transition-all duration-200 ease-in-out;
+    background-size: 200% auto;
+  }
+
+  .btn:hover {
+    @apply opacity-90;
+    background-position: right center;
+  }
+
+  .mb-0 {
+    margin-bottom: 0 !important;
+  }
+
+  .container {
+    @apply mx-auto px-4 max-w-[100%];
+  }
+
+  body .container {
+    @media(min-width: 500px) {
+      max-width: 90% !important;
+    }
+    @media(min-width: 1300px) {
+      max-width: 1170px !important;
+    }
+  }
+}
+
+
+/******************GLOBAL COMPONENTS***********************/
+
+
+h1, .h1{
+    font-size: 64px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+h2, .h2{
+    font-size: 48px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+h3, .h3{
+    font-size: 38px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+h4, .h4{
+    font-size: 28px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+h5, .h5{
+    font-size: 24px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+p{
+    margin-bottom: 1rem;
+}
+
+.hero-banner .swiper .swiper-button-next,.hero-banner .swiper .swiper-button-prev {
+    width: 40px;
+    height: 70px;
+    background-color: #fff;
+    --swiper-navigation-sides-offset: 0;
+    padding: 11px;
+    color: var(--primary);
+}
+
+.hero-banner .swiper .swiper-button-next:hover, .hero-banner .swiper .swiper-button-prev:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+.hero-banner .swiper  .swiper-pagination {
+    --swiper-pagination-bottom: 10px;
+    --swiper-pagination-bullet-inactive-color: #fff;
+    --swiper-pagination-color: var(--primary);
+    --swiper-pagination-bullet-inactive-opacity: 1;
+    --swiper-pagination-bullet-size: 10px;
+}
+
+.success-stories-slider .swiper-pagination {
+    --swiper-pagination-bottom: 10px;
+    --swiper-pagination-bullet-inactive-color: #000;
+    --swiper-pagination-color: var(--primary);
+    --swiper-pagination-bullet-inactive-opacity: 1;
+    --swiper-pagination-bullet-size: 10px;
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin-top: 30px;
+}
+
+
+.menu-bar-wpr .menu-bar {
+    background: transparent;
+    border: none;
+    padding: 0px;
+    margin: 0 5px 0 0;
+    box-shadow: none;
+    height: 22px;
+    width: 28px;
+    position: relative;
+    cursor: pointer;
+}
+
+.menu-bar-wpr .menu-bar .bars {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: var(--black);
+    border-radius: 10px;
+    position: absolute;
+    transition: 0.25s ease-in-out;
+    transform: rotate(0deg);
+}
+
+.menu-bar-wpr .menu-bar .bar1 {
+    top: 0px;
+}
+
+.menu-bar-wpr .menu-bar .bar2 {
+    top: 9px;
+    left: 0px;
+    transition: 0.15s ease-in-out;
+}
+
+.menu-bar-wpr .menu-bar .bar3 {
+    top: 18px;
+}
+
+.menu-bar-wpr .menu-bar.active .bar1 {
+    top: 7px;
+    transform: rotate(135deg);
+}
+
+.menu-bar-wpr .menu-bar.active .bar2 {
+    left: -5px;
+    opacity: 0;
+}
+
+.menu-bar-wpr .menu-bar.active .bar3 {
+    top: 7px;
+    transform: rotate(-135deg);
+}
+
+.menu-bar-wpr {
+    line-height: 0;
+}
+
+.mobile-menu {
+    --top-spacing: 0px;
+    --top-bar: 43px;
+    position: absolute;
+    top: calc(100% + var(--top-spacing, 20px));
+    left: 0px;
+    right: 0px;
+    z-index: 9;
+    bottom: calc(calc(-100vh + var(--top-bar))  + calc(100% + calc(var(--top-spacing, 20px) * 2)));
+    background-color: #fff;
+    overflow: auto;
+    line-height: normal;
+    padding: 10px;
+    /* box-shadow: 0px 4px 80px 0px #011E3E40; */
+}
+
+
+@media(max-width: 991px){
+    h1, .h1{
+        font-size: 55px;
+    }
+
+    h2, .h2{
+        font-size: 42px;
+    }
+
+    h3, .h3{
+        font-size: 34px;
+    }
+
+    h4, .h4{
+        font-size: 26px;
+    }
+}
+
+@media(max-width: 767px){
+    h1, .h1{
+        font-size: 46px;
+    }
+
+    h2, .h2{
+        font-size: 34px;
+    }
+
+    h3, .h3{
+        font-size: 28px;
+    }
+
+    h4, .h4{
+        font-size: 22px;
+    }
+    .mobile-menu {
+        --top-bar: 0px;
+    }
+}

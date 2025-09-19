@@ -1,46 +1,119 @@
-import React from "react";
-
-const imgLogo = "/images/home/logo.png";
+"use client";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
-  return (
-    <header className="w-full">
-      {/* Top Green Bar */}
-      <div className="bg-[#006600] h-[50px] flex items-center justify-center">
-        <nav className="flex items-center space-x-6 text-white text-[16px]">
-          <span>Why Nakuru</span>
-          <span>|</span>
-          <span>About Us</span>
-          <span>|</span>
-          <span>Incentives & Support</span>
-          <span>|</span>
-          <span>Success Stories</span>
-          <span>|</span>
-          <span>News & Events</span>
-        </nav>
-      </div>
+	const [menuOpen, setMenuOpen] = useState(false);
 
-      {/* Main Header Section */}
-      <div className="bg-white h-[90px] flex items-center justify-between px-[120px]">
-        {/* Logo */}
-        <div
-          className="h-[70px] w-[130px] bg-center bg-contain bg-no-repeat"
-          style={{ backgroundImage: `url('${imgLogo}')` }}
-        />
+	useEffect(() => {
+		if (menuOpen) {
+			document.body.classList.add("overflow-hidden");
+			document.documentElement.classList.add("overflow-hidden");
+		} else {
+			document.body.classList.remove("overflow-hidden");
+			document.documentElement.classList.remove("overflow-hidden");
+		}
+	}, [menuOpen]);
+	return (
+		<>
+			<div className="bg-secondary text-white py-2 md:block hidden">
+				<div className="container">
+					<ul className="flex flex-wrap justify-center font-interstate text-[16px] font-normal">
+						<li className="after:content-['|'] after:mx-2 last:after:content-none">
+							<Link href="#" className="text-white hover:underline">Why Nakuru</Link>
+						</li>
+						<li className="after:content-['|'] after:mx-2 last:after:content-none">
+							<Link href="#" className="text-white hover:underline">About Us</Link>
+						</li>
+						<li className="after:content-['|'] after:mx-2 last:after:content-none">
+							<Link href="#" className="text-white hover:underline">Incentives & Support</Link>
+						</li>
+						<li className="after:content-['|'] after:mx-2 last:after:content-none">
+							<Link href="#" className="text-white hover:underline">Success Stories</Link>
+						</li>
+						<li className="after:content-['|'] after:mx-2 last:after:content-none">
+							<Link href="#" className="text-white hover:underline">News & Events</Link>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<header className="py-4 relative">
+				<div className="container">
+					<div className="flex flex-nowrap items-center justify-between">
+						<div className="flex-shrink">
+							<Link href="/">
+								<Image src="/frontend/images/logo.png" alt="Nakuru" width={127} height={70} className="md:max-w-[100%] max-w-[110px]"/>
+							</Link>
+						</div>
 
-        {/* Center Navigation */}
-        <nav className="flex items-center space-x-14 text-black text-[18px] font-bold">
-          <span>Investment Opportunities</span>
-          <span>Diaspora Engagement</span>
-          <span>Key Sectors</span>
-        </nav>
+						<div className="flex flex-nowrap items-center justify-end gap-8">
+							<ul className="hidden lg:flex flex-wrap justify-end items-center font-interstate font-bold p-0 m-0 list-none gap-8">
+								<li>
+									<Link href="#">Investment Opportunities</Link>
+								</li>
+								<li>
+									<Link href="#">Diaspora Engagement</Link>
+								</li>
+								<li>
+									<Link href="#">Key Sectors</Link>
+								</li>
+							</ul>
 
-        {/* Contact Us Button */}
-        <button className="bg-gradient-to-r from-[#EB3A2A] to-[#F29D3F] text-white px-6 py-2 rounded text-[18px] font-bold">
-          Contact Us
-        </button>
-      </div>
-    </header>
-  );
+							<div className="hidden lg:flex gap-2.5">
+								<Link href="#" className="btn">
+									Contact Us
+								</Link>
+							</div>
+
+							<div className="menu-bar-wpr lg:hidden">
+								<button type="button" className={`menu-bar mr-3 ${menuOpen ? "active" : ""}`} onClick={() => setMenuOpen(!menuOpen)}
+								>
+									<span className="bars bar1"></span>
+									<span className="bars bar2"></span>
+									<span className="bars bar3"></span>
+								</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div className={`mobile-menu transition-opacity duration-300 ${ menuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
+					<div className="flex items-center h-full justify-center">
+					<ul className="flex flex-col max-h-full overflow-auto gap-6 font-bold text-lg text-center w-full">
+						<li>
+							<Link href="#">Investment Opportunities</Link>
+						</li>
+						<li>
+							<Link href="#">Diaspora Engagement</Link>
+						</li>
+						<li>
+							<Link href="#">Key Sectors</Link>
+						</li>
+						<li>
+							<Link href="#">Contact Us</Link>
+						</li>
+						<li>
+							<Link href="#">Why Nakuru</Link>
+						</li>
+						<li>
+							<Link href="#">About Us</Link>
+						</li>
+						<li>
+							<Link href="#">Incentives & Support</Link>
+						</li>
+						<li>
+							<Link href="#">Success Stories</Link>
+						</li>
+						<li>
+							<Link href="#">News & Events</Link>
+						</li>
+					</ul>
+					</div>
+				</div>
+			</header>
+			
+			
+		</>
+	)
 }
-
