@@ -1,6 +1,6 @@
 import "./frontendcss.css"; 
 import { DM_Sans } from "next/font/google";
-import Header from "@/components/header/header";
+import Header from "@/components/header/Header";
 import Footer from "@/components/header/footer";
 
 
