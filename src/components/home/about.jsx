@@ -19,7 +19,7 @@ export default function About(){
                             Whether your interests lie in geothermal </p>
                             <p>energy, agroprocessing, healthcare, tourism, real estate, or infrastructure, Nakuru offers a unique blend of opportunity and impact—where your capital doesn’t just grow, it transforms communities.</p>
                         </div>
-                        <Link href="#" className="btn">Read More About us</Link>
+                        <Link href="/about" className="btn">Read More About us</Link>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,7 @@ export default function Header() {
 							<Link href="#" className="text-white hover:underline">Why Nakuru</Link>
 						</li>
 						<li className="after:content-['|'] after:mx-2 last:after:content-none">
-							<Link href="#" className="text-white hover:underline">About Us</Link>
+							<Link href="/about" className="text-white hover:underline">About Us</Link>
 						</li>
 						<li className="after:content-['|'] after:mx-2 last:after:content-none">
 							<Link href="#" className="text-white hover:underline">Incentives & Support</Link>
@@ -61,7 +61,7 @@ export default function Header() {
 							</ul>
 
 							<div className="hidden lg:flex gap-2.5">
-								<Link href="#" className="btn">
+								<Link href="/contact" className="btn">
 									Contact Us
 								</Link>
 							</div>
@@ -97,7 +97,7 @@ export default function Header() {
 							<Link href="#">Why Nakuru</Link>
 						</li>
 						<li>
-							<Link href="#">About Us</Link>
+							<Link href="/about">About Us</Link>
 						</li>
 						<li>
 							<Link href="#">Incentives & Support</Link>
