@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import FooterInfo from "@/components/home/footerInfo";
 
+export const dynamic = "force-dynamic";
+
 type CmsEntry = {
   CmsPageName: string;
   CmsText: string;
@@ -19,9 +21,7 @@ async function getCmsContent(pageName: string): Promise<CmsEntry> {
 
   try {
     const res = await fetch(url, {
-      cache: "no-store" //error will come in vercel we cannot make its revalidate :0
-      // cache only, revalidation happens via ODR
-      //cache: "force-cache",
+      cache: "no-store" // give  each req fresh page
       // // ISR: cache, but revalidate every 60 seconds
       // next: { revalidate: 60 },
     });
