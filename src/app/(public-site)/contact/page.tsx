@@ -464,10 +464,10 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-gray-50 py-14 shadow-inner">
+      <section className="bg-gray-100 text-gray-800 py-11">
         <div className="container mx-auto text-center px-4">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Contact Us</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+          <p className="text-lg max-w-2xl mx-auto">
             We&apos;re here to help. Reach out to us with your questions or to
             start your investment journey.
           </p>

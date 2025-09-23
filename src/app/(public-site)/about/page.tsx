@@ -21,7 +21,7 @@ async function getCmsContent(pageName: string): Promise<CmsEntry> {
 
   try {
     const res = await fetch(url, {
-      cache: "no-store" // give  each req fresh page
+      cache: "no-store" // give  each req fresh
       // // ISR: cache, but revalidate every 60 seconds
       // next: { revalidate: 60 },
     });
@@ -48,7 +48,7 @@ export default async function AboutPage() {
   return (
     <>
    
-      <section className="bg-gray-50 py-14 shadow-inner">
+      {/* <section className="bg-gray-50 py-14 shadow-inner">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">
             {cmsEntry.CmsPageName}
@@ -58,9 +58,29 @@ export default async function AboutPage() {
             Invest in Nakuru.
           </p>
         </div>
-      </section>
+      </section> */}
 
+      {/* <section className="bg-secondary text-white py-11">
+      <div className="container mx-auto text-center px-4">
+        <h1 className="text-4xl font-bold mb-4">
+          {cmsEntry.CmsPageName}
+        </h1>
+        <p className="text-lg max-w-2xl mx-auto">
+          Learn more about our mission, vision, and the dedicated team behind Invest in Nakuru.
+        </p>
+      </div>
+    </section> */}
     
+      <section className="bg-gray-100 text-gray-800 py-11">
+        <div className="container mx-auto text-center px-4">
+          <h1 className="text-4xl font-bold mb-4">
+            {cmsEntry.CmsPageName}
+          </h1>
+          <p className="text-lg max-w-2xl mx-auto">
+            Learn more about our mission, vision, and the dedicated team behind Invest in Nakuru.
+          </p>
+        </div>
+      </section>
       <div className="py-14 bg-white">
         <div className="container mx-auto px-4">
         
