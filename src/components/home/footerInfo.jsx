@@ -9,7 +9,7 @@ export default function FooterInfo(){
                     <h2>Connecting Diaspora investors with Nakuru’s opportunities, fully supported by the County Government.</h2>
                 </div>
                 <div className="text-center">
-                    <Link href="#" className="btn px-8 font-dm-sans">Read More</Link>
+                    <Link href="/diaspora-engagement" className="btn px-8 font-dm-sans">Read More</Link>
                 </div>
             </div>
         </div>

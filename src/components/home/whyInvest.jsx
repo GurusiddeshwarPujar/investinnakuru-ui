@@ -37,7 +37,7 @@ export default function WhyInvest(){
                     <p>Because when you invest in Nakuru, you're not just growing a business—you're building the future of Kenya.</p>
                 </div>
                 <div className="text-center">
-                    <Link href="#" className="btn">Invest Now</Link>
+                    <Link href="/contact" className="btn">Invest Now</Link>
                 </div>
             </div>
         </div>

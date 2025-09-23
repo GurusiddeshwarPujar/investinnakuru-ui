@@ -325,3 +325,23 @@ p{
     @apply list-disc list-inside mb-4 ml-5;
 }
 
+/* table */
+.description table {
+  @apply w-full border-collapse border border-gray-300 my-6 text-left text-base;
+}
+
+.description thead {
+  @apply bg-gray-100;
+}
+
+.description th {
+  @apply border border-gray-300 px-4 py-2 font-bold;
+}
+
+.description td {
+  @apply border border-gray-300 px-4 py-2;
+}
+
+.description tr:nth-child(even) {
+  @apply bg-gray-50;
+}

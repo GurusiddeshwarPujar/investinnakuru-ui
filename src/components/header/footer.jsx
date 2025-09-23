@@ -12,10 +12,10 @@ export default function Footer() {
               <h6 className="text-[16px] font-bold uppercase mb-2">Useful Links</h6>
               <ul className="p-0 m-0 list-none">
                 <li className="not-last:mb-2">
-                  <Link href="#" className="text-inherit underline-offset-3 hover:underline">Investment Opportunities</Link>
+                  <Link href="/investment-opportunities" className="text-inherit underline-offset-3 hover:underline">Investment Opportunities</Link>
                 </li>
                 <li className="not-last:mb-2">
-                  <Link href="#" className="text-inherit underline-offset-3 hover:underline">Diaspora Engagement</Link>
+                  <Link href="/diaspora-engagement" className="text-inherit underline-offset-3 hover:underline">Diaspora Engagement</Link>
                 </li>
                 <li className="not-last:mb-2">
                   <Link href="#" className="text-inherit underline-offset-3 hover:underline">Key Sectors</Link>
@@ -34,19 +34,19 @@ export default function Footer() {
               <h6 className="text-[16px] font-bold uppercase mb-2">About us</h6>
               <ul className="p-0 m-0 list-none">
                 <li className="not-last:mb-2">
-                  <Link href="#" className="text-inherit underline-offset-3 hover:underline">Home</Link>
+                  <Link href="/" className="text-inherit underline-offset-3 hover:underline">Home</Link>
                 </li>
                 <li className="not-last:mb-2">
-                  <Link href="#" className="text-inherit underline-offset-3 hover:underline">Why Nakuru</Link>
+                  <Link href="/why-nakuru" className="text-inherit underline-offset-3 hover:underline">Why Nakuru</Link>
                 </li>
                 <li className="not-last:mb-2">
-                  <Link href="#" className="text-inherit underline-offset-3 hover:underline">About Us</Link>
+                  <Link href="/about-us" className="text-inherit underline-offset-3 hover:underline">About Us</Link>
                 </li>
                 <li className="not-last:mb-2">
                   <Link href="#" className="text-inherit underline-offset-3 hover:underline">News & Events</Link>
                 </li>
                 <li className="not-last:mb-2">
-                  <Link href="#" className="text-inherit underline-offset-3 hover:underline">Contact Us</Link>
+                  <Link href="/contact" className="text-inherit underline-offset-3 hover:underline">Contact Us</Link>
                 </li>
               </ul>
             </div>
@@ -59,7 +59,7 @@ export default function Footer() {
                 </div>
                 <div className="flex-grow">
                   <p className="uppercase mb-1 font-bold">Email us at:</p>
-                  <p className="mb-0 md:text-[28px] text-[24px] font-bold">diaspora@investinnakuru.com</p>
+                  <p className="mb-0 md:text-[28px] text-[24px] font-bold">diaspora@invest innakuru.com</p>
                 </div>
               </Link>
 

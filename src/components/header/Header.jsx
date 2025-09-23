@@ -21,7 +21,7 @@ export default function Header() {
 				<div className="container">
 					<ul className="flex flex-wrap justify-center font-interstate text-[16px] font-normal">
 						<li className="after:content-['|'] after:mx-2 last:after:content-none">
-							<Link href="#" className="text-white hover:underline">Why Nakuru</Link>
+							<Link href="/why-nakuru" className="text-white hover:underline">Why Nakuru</Link>
 						</li>
 						<li className="after:content-['|'] after:mx-2 last:after:content-none">
 							<Link href="/about-us" className="text-white hover:underline">About Us</Link>
@@ -50,10 +50,10 @@ export default function Header() {
 						<div className="flex flex-nowrap items-center justify-end gap-8">
 							<ul className="hidden lg:flex flex-wrap justify-end items-center font-interstate font-bold p-0 m-0 list-none gap-8">
 								<li>
-									<Link href="#">Investment Opportunities</Link>
+									<Link href="/investment-opportunities">Investment Opportunities</Link>
 								</li>
 								<li>
-									<Link href="#">Diaspora Engagement</Link>
+									<Link href="/diaspora-engagement">Diaspora Engagement</Link>
 								</li>
 								<li>
 									<Link href="#">Key Sectors</Link>
@@ -82,19 +82,19 @@ export default function Header() {
 					<div className="flex items-center h-full justify-center">
 					<ul className="flex flex-col max-h-full overflow-auto gap-6 font-bold text-lg text-center w-full">
 						<li>
-							<Link href="#">Investment Opportunities</Link>
+							<Link href="/investment-opportunities">Investment Opportunities</Link>
 						</li>
 						<li>
-							<Link href="#">Diaspora Engagement</Link>
+							<Link href="/diaspora-engagement">Diaspora Engagement</Link>
 						</li>
 						<li>
 							<Link href="#">Key Sectors</Link>
 						</li>
 						<li>
-							<Link href="#">Contact Us</Link>
+							<Link href="/contact">Contact Us</Link>
 						</li>
 						<li>
-							<Link href="#">Why Nakuru</Link>
+							<Link href="/why-nakuru">Why Nakuru</Link>
 						</li>
 						<li>
 							<Link href="/about-us">About Us</Link>
