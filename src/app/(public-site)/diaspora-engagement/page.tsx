@@ -1,5 +1,4 @@
 import Link from "next/link";
-import FooterInfo from "@/components/home/footerInfo";
 
 export const dynamic = "force-dynamic";
 
