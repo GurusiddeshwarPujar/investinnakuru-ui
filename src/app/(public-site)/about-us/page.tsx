@@ -5,7 +5,7 @@ import FooterInfo from "@/components/home/footerInfo";
 export const dynamic = "force-dynamic";
 
 type CmsEntry = {
-  CmsPageName: string;
+  // CmsPageName: string;
   CmsText: string;
 };
 
@@ -36,7 +36,7 @@ async function getCmsContent(pageName: string): Promise<CmsEntry> {
 
     
     return {
-      CmsPageName: "About Us",
+      //CmsPageName: "About Us",
       CmsText: "<p>Content could not be loaded. Please try again later.</p>",
     };
   }
@@ -50,7 +50,7 @@ export default async function AboutPage() {
       <section className="bg-gray-100 text-gray-800 py-11">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl font-bold mb-4">
-            {cmsEntry.CmsPageName}
+            About Us
           </h1>
           <p className="text-lg max-w-2xl mx-auto">
             Learn more about our mission, vision, and the dedicated team behind Invest in Nakuru.
