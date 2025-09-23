@@ -62,7 +62,8 @@ export default async function InvestmentOpportunitiesPage() {
                             width={570} 
                             height={500} 
                             className="rounded-lg shadow-xl object-cover"
-                /><br/><Image 
+                /><br/>
+                <Image 
                             src="/frontend/images/categories/real-estate.jpg" 
                             alt="Scenic view of Nakuru" 
                             width={570} 
