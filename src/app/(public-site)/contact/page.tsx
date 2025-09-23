@@ -479,7 +479,7 @@ export default function ContactPage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <form
-              className="contact-form grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"
+              className="contact-form grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
               onSubmit={handleSubmitContact(onSubmitContact)}
             >
               {/* Full Name */}
