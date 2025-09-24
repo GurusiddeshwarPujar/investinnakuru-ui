@@ -53,7 +53,7 @@ export default async function SuccessStoriesPage() {
 
   return (
     <>
-      <section className="bg-gray-100 text-gray-800 py-12">
+      <section className="bg-gray-100 text-gray-800 py-11">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl font-bold mb-4">Success Stories</h1>
           <p className="text-lg max-w-2xl mx-auto">

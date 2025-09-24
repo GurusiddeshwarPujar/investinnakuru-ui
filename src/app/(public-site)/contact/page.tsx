@@ -163,7 +163,7 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
 
   return (
     <>
-      {/* Hero Section */}
+      
       <section className="bg-gray-100 text-gray-800 py-11">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
@@ -174,7 +174,7 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
         </div>
       </section>
 
-      {/* Contact Form */}
+     
       <div className="md:py-[90px] py-[60px] bg-white">
         <div className="container">
           <div className="max-w-4xl mx-auto">
@@ -182,7 +182,7 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
               className="contact-form grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
               onSubmit={handleSubmitContact(onSubmitContact)}
             >
-              {/* Full Name */}
+              
               <div className="form-group">
                 <label htmlFor="ContactName" className="form-label">
                   Full Name
@@ -203,7 +203,7 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
                 )}
               </div>
 
-              {/* Email */}
+              
               <div className="form-group">
                 <label htmlFor="ContactEmail" className="form-label">
                   Email Address
@@ -228,7 +228,7 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
                 )}
               </div>
 
-              {/* Phone */}
+             
               <div className="form-group">
                 <label htmlFor="ContactPhoneNumber" className="form-label">
                   Phone Number

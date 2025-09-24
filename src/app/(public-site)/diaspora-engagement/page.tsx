@@ -54,10 +54,10 @@ export default async function DiasporaEngagementPage() {
   return (
     <>
     
-      <section className="bg-gray text-center py-14">
-        <div className="container">
-          <h1 className="h2 mb-4">Diaspora Engagement</h1>
-          <p className="max-w-3xl mx-auto text-lg">
+      <section className="bg-gray-100 text-gray-800 py-11">
+        <div className="container mx-auto text-center px-4">
+          <h1 className="text-4xl font-bold mb-4">Diaspora Engagement</h1>
+          <p className="text-lg max-w-2xl mx-auto">
             Discover how Nakuru County is fostering strong partnerships with
             the diaspora community to drive growth, innovation, and inclusive
             development.
@@ -68,7 +68,7 @@ export default async function DiasporaEngagementPage() {
      
       <div className="md:py-[90px] py-[60px] bg-white">
         <div className="container">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <div
               className="description prose max-w-none"
               dangerouslySetInnerHTML={{ __html: cmsEntry.CmsText }}
