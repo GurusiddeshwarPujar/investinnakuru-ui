@@ -30,7 +30,7 @@ export default function Header() {
 							<Link href="/incentives-support" className="text-white hover:underline">Incentives & Support</Link>
 						</li>
 						<li className="after:content-['|'] after:mx-2 last:after:content-none">
-							<Link href="#" className="text-white hover:underline">Success Stories</Link>
+							<Link href="/success-stories" className="text-white hover:underline">Success Stories</Link>
 						</li>
 						<li className="after:content-['|'] after:mx-2 last:after:content-none">
 							<Link href="#" className="text-white hover:underline">News & Events</Link>
@@ -103,7 +103,7 @@ export default function Header() {
 							<Link href="/incentives-support">Incentives & Support</Link>
 						</li>
 						<li>
-							<Link href="#">Success Stories</Link>
+							<Link href="/success-stories">Success Stories</Link>
 						</li>
 						<li>
 							<Link href="#">News & Events</Link>

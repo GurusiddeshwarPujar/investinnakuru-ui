@@ -24,7 +24,7 @@ export default function Footer() {
                   <Link href="/incentives-support" className="text-inherit underline-offset-3 hover:underline">Incentives & Support</Link>
                 </li>
                 <li className="not-last:mb-2">
-                  <Link href="#" className="text-inherit underline-offset-3 hover:underline">Success Stories</Link>
+                  <Link href="/success-stories" className="text-inherit underline-offset-3 hover:underline">Success Stories</Link>
                 </li>
               </ul>
             </div>
