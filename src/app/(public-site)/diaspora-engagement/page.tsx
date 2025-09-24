@@ -1,6 +1,17 @@
 import Link from "next/link";
+import { redirect } from "next/navigation"; 
 
 export const dynamic = "force-dynamic";
+
+
+export const metadata = {
+  title: "Diaspora Engagement | Invest In Nakuru",
+  description:
+    "Explore diaspora investment opportunities in Nakuru County. Invest in affordable housing, real estate, infrastructure, agribusiness, and green energy while contributing to Kenya’s economic growth. Learn about incentives, support, and secure investment channels for the diaspora community.",
+  keywords:
+    "diaspora investment Kenya, Nakuru County diaspora opportunities, Kenya diaspora bonds, real estate investment diaspora, affordable housing diaspora Kenya, diaspora agribusiness investment, diaspora remittances Kenya, infrastructure investment diaspora, green energy diaspora Kenya, secure diaspora investment platforms",
+};
+
 
 type CmsEntry = {
   CmsText: string;
@@ -20,6 +31,9 @@ async function getCmsContent(pageName: string): Promise<CmsEntry> {
       cache: "no-store",
     });
 
+    if (res.status === 404) redirect("/error-404"); 
+    if (res.status >= 500) redirect("/error-505");
+
     if (!res.ok) {
       throw new Error(`Failed to fetch CMS content. Status: ${res.status}`);
     }
@@ -27,6 +41,7 @@ async function getCmsContent(pageName: string): Promise<CmsEntry> {
     return res.json();
   } catch (error) {
     console.error("CMS Fetch Error:", error);
+    redirect("/error-505");
     return {
       CmsText: "<p>Content could not be loaded. Please try again later.</p>",
     };

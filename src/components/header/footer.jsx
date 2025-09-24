@@ -18,10 +18,10 @@ export default function Footer() {
                   <Link href="/diaspora-engagement" className="text-inherit underline-offset-3 hover:underline">Diaspora Engagement</Link>
                 </li>
                 <li className="not-last:mb-2">
-                  <Link href="#" className="text-inherit underline-offset-3 hover:underline">Key Sectors</Link>
+                  <Link href="/key-sectors" className="text-inherit underline-offset-3 hover:underline">Key Sectors</Link>
                 </li>
                 <li className="not-last:mb-2">
-                  <Link href="#" className="text-inherit underline-offset-3 hover:underline">Incentives & Support</Link>
+                  <Link href="/incentives-support" className="text-inherit underline-offset-3 hover:underline">Incentives & Support</Link>
                 </li>
                 <li className="not-last:mb-2">
                   <Link href="#" className="text-inherit underline-offset-3 hover:underline">Success Stories</Link>
@@ -59,7 +59,7 @@ export default function Footer() {
                 </div>
                 <div className="flex-grow">
                   <p className="uppercase mb-1 font-bold">Email us at:</p>
-                  <p className="mb-0 md:text-[28px] text-[24px] font-bold">diaspora@invest innakuru.com</p>
+                  <p className="mb-0 md:text-[28px] text-[24px] font-bold">diaspora@investinnakuru.com</p>
                 </div>
               </Link>
 

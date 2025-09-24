@@ -1,8 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import FooterInfo from "@/components/home/footerInfo";
+import { redirect } from "next/navigation"; 
 
 export const dynamic = "force-dynamic";
+
+export const metadata = {
+  title: "Investment Opportunities | Invest In Nakuru",
+  description:
+    "Explore diverse investment opportunities in Nakuru County, Kenya. From real estate and affordable housing to agribusiness, tourism, infrastructure, and green energy, Nakuru offers a secure and profitable environment for local and diaspora investors.",
+  keywords:
+    "investment opportunities Nakuru, real estate investment Kenya, affordable housing projects Nakuru, agribusiness investment Kenya, tourism investment Nakuru, infrastructure development Kenya, green energy projects Nakuru, manufacturing investment Kenya, commercial real estate Nakuru, profitable investments Kenya",
+};
+
 
 type CmsEntry = {
   CmsText: string;
@@ -22,6 +32,9 @@ async function getCmsContent(pageName: string): Promise<CmsEntry> {
       cache: "no-store", 
     });
 
+    if (res.status === 404) redirect("/error-404"); 
+    if (res.status >= 500) redirect("/error-505");
+
     if (!res.ok) {
       throw new Error(`Failed to fetch CMS content. Status: ${res.status}`);
     }
@@ -29,6 +42,7 @@ async function getCmsContent(pageName: string): Promise<CmsEntry> {
     return res.json();
   } catch (error) {
     console.error("CMS Fetch Error:", error);
+    redirect("/error-505");
     return {
       CmsText: "<p>Content could not be loaded. Please try again later.</p>",
     };

@@ -136,7 +136,7 @@ export default function Dashboard() {
     fetchNewsletterSubscriber();
     fetchBanner();
     fetchTestimonial();
-  }, []);
+  }, [fetchBanner, fetchCategoryCount, fetchContactCount,fetchNewsletterSubscriber,fetchNewsCount]);
 
   return (
     <div className="grid grid-cols-12 gap-6">

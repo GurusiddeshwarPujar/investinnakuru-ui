@@ -1,3 +1,4 @@
+// app/(public-site)/Error505.tsx
 import GridShape from "@/components/common/GridShape";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -5,37 +6,38 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Next.js Error 404 | Invest In Nakuru",
+  title: "Error 505 | Invest In Nakuru",
   description:
-    "This is Invest In n Error 404 page for Invest In Nakuru - Invest In Nakuru  Dashboard Template",
+    "This is Next.js Error 505 page for Invest In Nakuru - Invest In Nakuru",
 };
 
-export default function Error404() {
+export default function Error505() {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen p-6 overflow-hidden z-1">
       <GridShape />
+
       <div className="mx-auto w-full max-w-[242px] text-center sm:max-w-[472px]">
         <h1 className="mb-8 font-bold text-gray-800 text-title-md dark:text-white/90 xl:text-title-2xl">
-          ERROR
+          SERVER ERROR
         </h1>
 
         <Image
-          src="/images/error/404.svg"
-          alt="404"
+          src="/images/error/500.svg"
+          alt="505"
           className="dark:hidden"
           width={472}
           height={152}
         />
         <Image
-          src="/images/error/404-dark.svg"
-          alt="404"
+          src="/images/error/500-dark.svg"
+          alt="505"
           className="hidden dark:block"
           width={472}
           height={152}
         />
 
         <p className="mt-10 mb-6 text-base text-gray-700 dark:text-gray-400 sm:text-lg">
-          We can’t seem to find the page you are looking for!
+          Oops! Something went wrong on the server. Please try again later.
         </p>
 
         <Link
@@ -45,6 +47,7 @@ export default function Error404() {
           Back to Home Page
         </Link>
       </div>
+     
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function Header() {
 							<Link href="/about-us" className="text-white hover:underline">About Us</Link>
 						</li>
 						<li className="after:content-['|'] after:mx-2 last:after:content-none">
-							<Link href="#" className="text-white hover:underline">Incentives & Support</Link>
+							<Link href="/incentives-support" className="text-white hover:underline">Incentives & Support</Link>
 						</li>
 						<li className="after:content-['|'] after:mx-2 last:after:content-none">
 							<Link href="#" className="text-white hover:underline">Success Stories</Link>
@@ -56,7 +56,7 @@ export default function Header() {
 									<Link href="/diaspora-engagement">Diaspora Engagement</Link>
 								</li>
 								<li>
-									<Link href="#">Key Sectors</Link>
+									<Link href="/key-sectors">Key Sectors</Link>
 								</li>
 							</ul>
 
@@ -88,7 +88,7 @@ export default function Header() {
 							<Link href="/diaspora-engagement">Diaspora Engagement</Link>
 						</li>
 						<li>
-							<Link href="#">Key Sectors</Link>
+							<Link href="/key-sectors">Key Sectors</Link>
 						</li>
 						<li>
 							<Link href="/contact">Contact Us</Link>
@@ -100,7 +100,7 @@ export default function Header() {
 							<Link href="/about-us">About Us</Link>
 						</li>
 						<li>
-							<Link href="#">Incentives & Support</Link>
+							<Link href="/incentives-support">Incentives & Support</Link>
 						</li>
 						<li>
 							<Link href="#">Success Stories</Link>

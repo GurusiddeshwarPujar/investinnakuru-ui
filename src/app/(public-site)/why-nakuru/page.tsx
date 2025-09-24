@@ -1,8 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import FooterInfo from "@/components/home/footerInfo";
+import { redirect } from "next/navigation"; 
 
 export const dynamic = "force-dynamic";
+
+export const metadata = {
+  title: "Why Nakuru | Invest In Nakuru",
+  description:
+    "Discover why Nakuru County is one of Kenya’s fastest-growing investment destinations. With strategic location, skilled workforce, infrastructure growth, tax incentives, and government support, Nakuru offers unmatched opportunities for investors and the diaspora.",
+  keywords:
+    "why invest in Nakuru, Nakuru County investment opportunities, Kenya fastest growing cities, business environment Nakuru, tax incentives Kenya, strategic investment location Kenya, infrastructure development Nakuru, diaspora investment Kenya, ease of doing business Nakuru, top investment destinations Kenya",
+};
+
 
 type CmsEntry={
      CmsText: string;
@@ -22,6 +32,9 @@ async function getwhynakuruContent(pageName:string):Promise<CmsEntry>{
             cache :"no-store",
         });
 
+        if (res.status === 404) redirect("/error-404"); 
+        if (res.status >= 500) redirect("/error-505");
+
         if(!res.ok){
              throw new Error(`Failed to fetch CMS content. Status: ${res.status}`);
         }
@@ -30,6 +43,7 @@ async function getwhynakuruContent(pageName:string):Promise<CmsEntry>{
     }
     catch (error) {
     console.error("CMS Fetch Error:", error);
+    redirect("/error-505");
     return {
       CmsText: "<p>Content could not be loaded. Please try again later.</p>",
     };
