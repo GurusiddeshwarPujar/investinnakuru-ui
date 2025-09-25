@@ -7,7 +7,7 @@ export default function Intro(){
             <div className="container relative z-10">
                 <div className="text-center text-white max-w-[770px] mx-auto">
                     <h2 className="mb-7">Young innovative educated workforce</h2>
-                    <Link href="#" className="btn">Read More</Link>
+                    <Link href="/investment-opportunities" className="btn">Read More</Link>
                 </div>
             </div>
         </div>

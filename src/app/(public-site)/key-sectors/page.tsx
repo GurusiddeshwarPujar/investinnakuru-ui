@@ -23,7 +23,7 @@ export default function KeySectorsPage() {
           </p>
         </div>
       </section>
-      <KeySector />
+      <KeySector showTitle={false}/>
       <FooterInfo />
     </>
   );

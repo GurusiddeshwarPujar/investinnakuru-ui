@@ -78,10 +78,10 @@ export default function Footer() {
 
         {/* Bottom Footer Bar */}
         <div className="py-4 grid md:grid-cols-3 grid-cols-1 border-t border-[#ffffff4d] gap-2">
-          <p className="mb-0 md:order-first order-last">© 2025 Invest In Nakuru. All Rights Reserved</p>
+          <p className="mb-0 md:order-first order-last">© {new Date().getFullYear()} Invest In Nakuru. All Rights Reserved</p>
           <p className="mb-0 text-center">
-            <Link href="#" className="underline-offset-3 hover:underline">Terms & Conditions</Link> |{" "}
-            <Link href="#" className="underline-offset-3 hover:underline">Privacy Policy</Link>
+            <Link href="/terms-conditions" className="underline-offset-3 hover:underline">Terms & Conditions</Link> |{" "}
+            <Link href="/privacy-policy" className="underline-offset-3 hover:underline">Privacy Policy</Link>
           </p>
           <div className="social-links md:order-last order-first">
             <ul className="flex md:justify-end justify-center mb-0 p-0 m-0 list-none gap-2">

@@ -20,6 +20,14 @@ export async function middleware(req) {
   // ];
   // const protectedUserPaths = ['/dashboard', '/profile'];
 
+
+//new 
+  if (isAdminUser && !adminAuthToken && !publicAdminAuthPaths.some(p => path.startsWith(p))) {
+    const response = NextResponse.redirect(new URL('/admin/login', req.url));
+    response.cookies.delete('isAdmin');
+    return response;
+  }
+
   // Admin Auth Pages
   if (publicAdminAuthPaths.some(p => path.startsWith(p))) {
     if (adminAuthToken && isAdminUser && path === '/admin/login') {
