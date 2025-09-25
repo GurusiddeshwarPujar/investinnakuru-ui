@@ -63,7 +63,7 @@ export default function Dashboard() {
   const fetchNewsCount =async ()=>{
     try{
       const token = getCookie("authToken");
-      const res= await fetch(`${backendUrl}/api/news`,{
+      const res= await fetch(`${backendUrl}/api/admin/news`,{
         headers:{"x-auth-token":token || ""},
       });
 
@@ -136,7 +136,7 @@ export default function Dashboard() {
     fetchNewsletterSubscriber();
     fetchBanner();
     fetchTestimonial();
-  }, [fetchBanner, fetchCategoryCount, fetchContactCount,fetchNewsletterSubscriber,fetchNewsCount]);
+  }, []);
 
   return (
     <div className="grid grid-cols-12 gap-6">

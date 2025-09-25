@@ -43,7 +43,7 @@ export default function Footer() {
                   <Link href="/about-us" className="text-inherit underline-offset-3 hover:underline">About Us</Link>
                 </li>
                 <li className="not-last:mb-2">
-                  <Link href="#" className="text-inherit underline-offset-3 hover:underline">News & Events</Link>
+                  <Link href="/news-events" className="text-inherit underline-offset-3 hover:underline">News & Events</Link>
                 </li>
                 <li className="not-last:mb-2">
                   <Link href="/contact" className="text-inherit underline-offset-3 hover:underline">Contact Us</Link>
