@@ -1,11 +1,12 @@
-import Image from "next/image";
-import Link from "next/link";
+// 
+
 import { redirect } from "next/navigation";
+import NewsList from "@/components/news/UserNewsList"; 
 
 export const dynamic = "force-dynamic";
 
-
-type NewsArticle = {
+// News Article type definition
+export type NewsArticle = {
   NewsId: string;
   NewsTitle: string;
   NewsShortDescription: string;
@@ -15,6 +16,7 @@ type NewsArticle = {
   createdAt: string;
 };
 
+// Fetch news data function
 async function fetchNews(): Promise<NewsArticle[]> {
   const baseUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
   const url = `${baseUrl}/api/admin/news/listnews`;
@@ -43,9 +45,10 @@ async function fetchNews(): Promise<NewsArticle[]> {
   }
 }
 
+
 export default async function NewsListingPage() {
   const news = await fetchNews();
-  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || '';
 
   if (!news || news.length === 0) {
     return (
@@ -68,38 +71,7 @@ export default async function NewsListingPage() {
 
       <div className="md:py-[90px] py-[60px] bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 grid-cols-1 gap-7">
-            {news.map((article) => (
-              <div key={article.NewsId} className="h-[100%]">
-                <div className="relative pb-[68%] overflow-hidden mb-5">
-                  <Link href={`/news-events/${article.NewsURL}`}>
-                    <Image
-                      src={`${baseUrl}/images/news/${article.Image}`}
-                      alt={article.NewsTitle}
-                      className="absolute top-0 left-0 w-[100%] h-[100%] object-cover"
-                      width={375}
-                      height={250}
-                    />
-                  </Link>
-                </div>
-                <p className="text-primary mb-3">
-                  {new Date(article.createdAt).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </p>
-                <h5 className="mb-3">
-                  <Link href={`/news-events/${article.NewsURL}`} className="text-inherit">
-                    {article.NewsTitle}
-                  </Link>
-                </h5>
-                <div className="description">
-                  <p className="last:mb-0">{article.NewsShortDescription}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <NewsList news={news} baseUrl={baseUrl} />
         </div>
       </div>
     </>
