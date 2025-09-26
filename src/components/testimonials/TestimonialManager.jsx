@@ -35,7 +35,7 @@ export default function TestimonialManager() {
         handleAuthError();
         return;
       }
-      if (!res.ok) throw new Error("Failed to fetch testimonials.");
+      if (!res.ok) throw new Error("Failed to fetch success stories.");
       const data = await res.json();
       setTestimonials(data);
     } catch (err) {
@@ -74,7 +74,7 @@ export default function TestimonialManager() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-48">
-        <p>Loading testimonials...</p>
+        <p>Loading success stories...</p>
       </div>
     );
   }
@@ -94,17 +94,17 @@ export default function TestimonialManager() {
       {view === 'list' ? (
         <>
           <div className="flex justify-end mb-4">
-            <Button onClick={handleAddClick}>Add Testimonial</Button>
+            <Button onClick={handleAddClick}>Add Success Stories</Button>
           </div>
           <TestimonialsTable
             testimonials={testimonials}
             onEditClick={handleEditClick}
             onTestimonialDeleted={() => {
-              setStatus("Testimonial deleted successfully!");
+              setStatus("Success Stories deleted successfully!");
               fetchTestimonials();
             }}
             onFeaturedToggled={() => {
-              setStatus("Testimonial featured status updated successfully!");
+              setStatus("Success Stories featured status updated successfully!");
               fetchTestimonials();
             }}
             onError={(message) => setStatus(message)}
@@ -118,11 +118,11 @@ export default function TestimonialManager() {
           editingTestimonial={editingTestimonial}
           setEditingTestimonial={setEditingTestimonial}
           onTestimonialAdded={() => {
-            setStatus("Testimonial added successfully!");
+            setStatus("Success Stories added successfully!");
             handleBackToList();
           }}
           onTestimonialUpdated={() => {
-            setStatus("Testimonial updated successfully!");
+            setStatus("Success Stories updated successfully!");
             handleBackToList();
           }}
           onError={(message) => setStatus(message)}

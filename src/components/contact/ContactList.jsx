@@ -201,7 +201,7 @@ export default function ContactList() {
         </div>
       </div>
 
-      {/* Modal */}
+      
       {selectedContact && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-70">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg w-full">
@@ -211,7 +211,7 @@ export default function ContactList() {
               </h3>
             </div>
 
-            <div className="border rounded-lg divide-y">
+            <div className="border rounded-lg divide-y divide-gray-200 dark:divide-gray-700 max-h-[50vh] overflow-y-auto">
               <div className="flex justify-between px-4 py-2">
                 <span className="font-medium">Name:</span>
                 <span>{selectedContact.ContactName}</span>

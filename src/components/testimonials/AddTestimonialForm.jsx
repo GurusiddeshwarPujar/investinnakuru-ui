@@ -107,7 +107,7 @@ export default function AddTestimonialForm({
   return (
     <div className="mb-6">
       <h2 className="text-2xl font-bold">
-        {editingTestimonial ? "Update Testimonial" : "Add New Testimonial"}
+        {editingTestimonial ? "Update Success Stories" : "Add New Success Stories"}
       </h2>
 
       <form
@@ -146,7 +146,7 @@ export default function AddTestimonialForm({
     
         <div>
           <label htmlFor="testimonial" className="block mb-2 text-sm font-medium">
-            Testimonial
+            Testimonial (Share your success story)
           </label>
           <textarea
             id="testimonial"
@@ -170,7 +170,7 @@ export default function AddTestimonialForm({
     
         <div>
           <label htmlFor="image" className="block mb-2 text-sm font-medium">
-            Testimonial Image
+            Image
           </label>
           <input
             type="file"
@@ -208,7 +208,7 @@ export default function AddTestimonialForm({
     
         <div className="flex space-x-2">
           <Button type="submit" disabled={isSubmitting} className="mt-2">
-            {isSubmitting ? "Processing..." : editingTestimonial ? "Update Testimonial" : "Add Testimonial"}
+            {isSubmitting ? "Processing..." : editingTestimonial ? "Update Success Stories" : "Add Success Stories"}
           </Button>
           <Button
             type="button"

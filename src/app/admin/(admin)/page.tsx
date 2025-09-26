@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ListIcon, PageIcon, SettingIcon, UserCircleIcon,BoxCubeIcon,DocsIcon,ChatIcon } from "../../../icons/index";
+import { useRouter } from "next/navigation"; 
+import { destroyCookie } from "nookies";
 
 
 const getCookie = (name: string) => {
@@ -15,6 +17,7 @@ const getCookie = (name: string) => {
 
 export default function Dashboard() {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+  const router = useRouter();
 
   const [contactCount, setContactCount] = useState<number>(0);
   const [categoryCount,setCategoryCount] = useState<number>(0);
@@ -23,12 +26,27 @@ export default function Dashboard() {
   const [bannerCount,setbannerCount]=useState<number>(0);
   const [testimonialCount,settestimonialCount]=useState<number>(0);
 
+
+  const handleLogout = () => {
+    destroyCookie(null, "authToken", { path: "/" });
+    destroyCookie(null, "isAdmin", { path: "/" });
+    
+    console.log("Authentication failure detected, redirecting to login...");
+    router.push("/admin/login");
+  };
+
   const fetchContactCount = async () => {
     try {
       const token = getCookie("authToken");
       const res = await fetch(`${backendUrl}/api/contacts`, {
         headers: { "x-auth-token": token || "" },
       });
+
+      if (res.status === 401 || res.status === 403) {
+        handleLogout(); 
+        return; 
+      }
+
 
       if (!res.ok) throw new Error("Failed to fetch contacts");
       const data = await res.json();
@@ -50,6 +68,11 @@ export default function Dashboard() {
         headers:{"x-auth-token":token || ""},
       });
 
+      if (res.status === 401 || res.status === 403) {
+        handleLogout(); 
+        return;
+      }
+
       if(!res.ok) throw new Error("Failed to fetch categories");
       const data=await res.json();
 
@@ -66,6 +89,11 @@ export default function Dashboard() {
       const res= await fetch(`${backendUrl}/api/admin/news`,{
         headers:{"x-auth-token":token || ""},
       });
+
+      if (res.status === 401 || res.status === 403) {
+        handleLogout(); 
+        return;
+      }
 
       if(!res.ok) throw new Error("Failed to fetch news articles");
       const data=await res.json();
@@ -85,6 +113,11 @@ export default function Dashboard() {
         headers:{"x-auth-token":token || ""},
       });
 
+      if (res.status === 401 || res.status === 403) {
+        handleLogout(); 
+        return;
+      }
+
       if(!res.ok) throw new Error("Failed to fetch newsletter subscriptions");
       const data=await res.json();
 
@@ -102,6 +135,11 @@ export default function Dashboard() {
         headers:{"x-auth-token":token || ""},
       });
 
+      if (res.status === 401 || res.status === 403) {
+        handleLogout(); 
+        return;
+      }
+
 
       if(!res.ok) throw new Error("Failed to fetch banner.");
       const data=await res.json();
@@ -117,6 +155,11 @@ export default function Dashboard() {
       const res =await fetch(`${backendUrl}/api/testimonials`,{
         headers:{"x-auth-token":token || ""},
       });
+
+      if (res.status === 401 || res.status === 403) {
+        handleLogout(); 
+        return;
+      }
 
       if(!res.ok) throw new Error("Failed to fetch testimonials.");
       const data=await res.json();
@@ -197,7 +240,7 @@ export default function Dashboard() {
               </span>
               <div className="flex flex-col">
                 <span className="font-semibold text-gray-800 dark:text-gray-200">
-                  Manage Testimonials
+                  Manage Success Stories
                 </span>
               </div>
             </div>

@@ -38,7 +38,7 @@ const navItems = [
   },
     {
     icon:  <ChatIcon />,
-    name: "Manage Testimonials",
+    name: "Manage Success Stories",
     path: "/admin/testimonials",
   },
   {

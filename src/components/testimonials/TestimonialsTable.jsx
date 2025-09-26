@@ -21,7 +21,7 @@ export default function TestimonialsTable({
   const [selectedTestimonial, setSelectedTestimonial] = useState(null);
 
   const handleDelete = async (testimonialId) => {
-    if (window.confirm("Are you sure you want to delete this testimonial?")) {
+    if (window.confirm("Are you sure you want to delete this success stories?")) {
       try {
         const res = await fetch(`${backendUrl}/api/testimonials/${testimonialId}`, {
           method: "DELETE",
@@ -33,7 +33,7 @@ export default function TestimonialsTable({
             handleAuthError();
             return;
           }
-          throw new Error(`Failed to delete testimonial: Server responded with ${res.status}`);
+          throw new Error(`Failed to delete success stories: Server responded with ${res.status}`);
         }
         onTestimonialDeleted();
       } catch (err) {
@@ -79,7 +79,7 @@ export default function TestimonialsTable({
 
   return (
     <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4">
-      <h2 className="text-2xl font-bold mb-4">List of Testimonials</h2>
+      <h2 className="text-2xl font-bold mb-4">List of Success Stories</h2>
    
       <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
         <select
@@ -95,7 +95,7 @@ export default function TestimonialsTable({
         </select>
         <input
           type="text"
-          placeholder="Search testimonials..."
+          placeholder="Search success stories..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="border px-3 py-2 rounded-lg w-full md:w-1/3"
@@ -214,7 +214,7 @@ export default function TestimonialsTable({
   <div className="fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70 overflow-y-auto">
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-3xl w-full mx-4">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white">Testimonial Details</h3>
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white">Success Stories Details</h3>
       </div>
       
 
@@ -260,7 +260,7 @@ export default function TestimonialsTable({
         </div>
 
          <div className="px-4 py-2">
-          <span className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Testimonial:</span>
+          <span className="font-medium text-gray-700 dark:text-gray-300 block mb-1">Testimonial (Share your success story):</span>
           <div className="prose dark:prose-invert max-w-none text-gray-900 dark:text-white" dangerouslySetInnerHTML={{ __html: selectedTestimonial.testimonial }} />
         </div>
       </div>
