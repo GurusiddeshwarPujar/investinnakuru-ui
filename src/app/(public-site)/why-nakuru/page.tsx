@@ -58,7 +58,7 @@ export default async function WhyNakuruPage() {
   
       <section className="bg-gray-100 text-gray-800 py-11">
         <div className="container mx-auto text-center px-4">
-          <h1 className="text-4xl font-bold mb-4">Why Invest in Nakuru?</h1>
+          <h1 className="text-4xl font-bold mb-4">Why Nakuru?</h1>
           <p className="text-lg max-w-2xl mx-auto">
             Discover the strategic advantages, thriving economy, and supportive ecosystem that make Nakuru County the premier investment destination in the heart of Kenya&apos;s Great Rift Valley.
           </p>
