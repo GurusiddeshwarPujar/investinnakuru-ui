@@ -319,6 +319,18 @@ p{
     @apply border-white ring-2 ring-white/30;
 }
 
+@layer components {
+  .description {
+    @apply text-justify;
+  }
+
+
+}
+
+/* .description{
+     @apply text-justify;
+} */
+
 
 .description ul,
 .description ol {

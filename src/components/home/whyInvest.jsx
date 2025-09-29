@@ -5,7 +5,7 @@ export default function WhyInvest(){
     return (
         <div className="md:py-[90px] py-[60px] bg-gray text-center">
             <div className="container">
-                <h2 className="mb-8">Why Invest In Nakuru.com?</h2>
+                <h2 className="mb-8">Why Nakuru? </h2>
                 <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-7">
                     <div className="bg-white border-border border-1 border-solid p-7 h-[100%]">
                         <Image src="/frontend/images/icons/investment-support.svg" alt="Curated investment-ready projects with government support" width={80} height={80} className="mb-5 mx-auto" />

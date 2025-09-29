@@ -36,7 +36,7 @@ export default function KeySector({ showTitle = true }) {
     <div className="md:py-[90px] pt-[60px] pb-[80px]">
       <div className="container">
         {showTitle && (
-          <h2 className="text-center mb-8">Key Sector to Invest</h2>
+          <h2 className="text-center mb-8">Explore Key Sectors to Invest </h2>
         )}
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-7 text-center">
           {categories.map(({ CatId, CatName, CatURL, Image }) => (

@@ -16,7 +16,7 @@ export default function KeySectorsPage() {
       <section className="bg-gray-100 text-gray-800 py-11">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl font-bold mb-4">
-            Key Investment Sectors
+            Explore Key Sectors to Invest 
           </h1>
           <p className="text-lg max-w-2xl mx-auto">
             Explore the priority sectors where your investment can thrive and make a significant impact in Nakuru County.

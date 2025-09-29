@@ -65,21 +65,33 @@
 "use client";
 import { useEffect } from "react";
 import Swiper from "swiper";
-import { Navigation, Pagination, Autoplay, Thumbs, Mousewheel, FreeMode } from "swiper/modules";
+import { Navigation, Pagination, Autoplay, Thumbs, Mousewheel, FreeMode,EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/thumbs";
 import "swiper/css/free-mode";
+import "swiper/css/effect-fade"; 
+
+
 
 function initSwipers() {
   // Prevent double initialization
   if(document.querySelector('.hero-banner-slider') && !document.querySelector('.hero-banner-slider').swiper){
     new Swiper(".hero-banner-slider", {
-      modules: [Pagination, Navigation],
+      modules: [Pagination, Navigation, Autoplay, EffectFade],
       slidesPerView: 1,
       spaceBetween: 0,
       speed: 600,
+      speed: 1000, // 1 second fade transition
+      effect: "fade", // <--- Important!
+      fadeEffect: {
+        crossFade: true, // Smooth fade
+      },
+      autoplay: {
+        delay: 4000, // 4 seconds per banner
+        disableOnInteraction: false,
+      },
       pagination: {
         el: ".swiper-pagination",
         clickable: true,

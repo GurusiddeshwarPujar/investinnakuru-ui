@@ -72,6 +72,16 @@ export default function Footer() {
                   <p className="mb-0 md:text-[28px] text-[24px] font-bold">+254 712 000 000</p>
                 </div>
               </Link>
+
+              <Link href="#" className="flex flex-nowrap not-last:mb-15 leading-[1] mt-5">
+                <div className="md:w-[60px] md:h-[60px] w-[50px] h-[50px] flex items-center justify-center border-[#ffffff4d] border border-solid rounded-full md:mr-5 mr-3 flex-shrink-0">
+                  <Image src="/frontend/images/icons/link.svg" alt="WhatsApp" width={24} height={24} />
+                </div>
+                <div className="flex-grow">
+                  <p className="uppercase mb-1 font-bold">Related Official Sites:</p>
+                  <p className="mb-0 md:text-[28px] text-[24px] font-bold">VisitNakuru.com</p>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
