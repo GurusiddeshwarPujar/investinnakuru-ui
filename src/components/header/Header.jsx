@@ -39,7 +39,7 @@ export default function Header() {
 							<Link href="/news-events" className="text-white hover:underline">News & Events</Link>
 						</li>
 						<li className="after:content-['|'] after:mx-2 last:after:content-none">
-							<Link href="#" className="text-white hover:underline">Data & Report</Link>
+							<Link href="/data-reports" className="text-white hover:underline">Data & Report</Link>
 						</li>
 					</ul>
 				</div>
@@ -121,7 +121,7 @@ export default function Header() {
 							<Link href="/news-events">News & Events</Link>
 						</li>
 						<li>
-							<Link href="#">Data & Report</Link>
+							<Link href="/data-reports">Data & Report</Link>
 						</li>
 					</ul>
 					</div>
