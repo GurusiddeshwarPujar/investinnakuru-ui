@@ -15,7 +15,7 @@ export default function DataReportsBanner() {
       <div className="container relative z-10">
         <div className="max-w-4xl mx-auto text-center md:text-left">
            <h1 className="uppercase">{/* text-5xl md:text-6xl font-serif mb-6 tracking-wider uppercase*/}
-            THE INVESTMENT PLATFORM SPECIAL REPORT
+            Data & Report
           </h1>
 
           <p className="description text-lg mb-4">
@@ -30,9 +30,8 @@ export default function DataReportsBanner() {
             in the region.
           </p>
           <Link
-            href="/frontend/reports/sample.pdf"
-            className="btn"
-            // inline-block px-10 py-3 mt-4 border border-white text-white hover:bg-white hover:text-gray-800 transition duration-300 font-dm-sans uppercase tracking-widest
+            href="/frontend/reports/sample.pdf" target="_blank" rel="noopener noreferrer"
+            className="inline-block px-10 py-3 mt-4 border border-white text-white hover:bg-white hover:text-gray-800 transition duration-300 font-dm-sans uppercase tracking-widest"
           >
             Read The Full Report
           </Link>
