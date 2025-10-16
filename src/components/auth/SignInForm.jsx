@@ -21,6 +21,7 @@ export default function SignInForm() {
 
   const [error, setError] = useState(null);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,6 +45,8 @@ export default function SignInForm() {
     if (!isValid) {
       return;
     }
+
+    setIsLoading(true);
 
     try {
       const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
@@ -88,10 +91,12 @@ export default function SignInForm() {
       } else {
         const data = await response.json();
         setError(data.msg || "Login failed. Please check your credentials.");
+        setIsLoading(false);
       }
     } catch (err) {
       console.error("Frontend login error:", err);
       setError("An unexpected error occurred. Please try again.");
+      setIsLoading(false);
     }
   };
 
@@ -173,8 +178,8 @@ export default function SignInForm() {
                 </div>
 
                 <div>
-                  <Button type="submit" className="w-full" size="sm">
-                    Login
+                  <Button type="submit" className="w-full" size="sm" disabled={isLoading}>
+                    {/* Login */}{isLoading ? "Logging in..." : "Login"}
                   </Button>
                 </div>
               </div>
