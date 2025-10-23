@@ -169,9 +169,12 @@ export default function NewsletterList() {
             Delete Selected ({selectedIds.length})
           </button>
           <button
-            onClick={exportToExcel}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg"
-          >
+            onClick={exportToExcel} 
+          //   className="px-4 py-2 bg-green-600 text-white rounded-lg"
+          // >
+            disabled={subscribers.length === 0}
+            className="px-4 py-2 bg-green-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             Export to Excel
           </button>
         </div>

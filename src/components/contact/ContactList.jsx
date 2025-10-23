@@ -203,15 +203,18 @@ export default function ContactList() {
 
       
       {selectedContact && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-70">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg w-full">
+
+        // <div className="fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-70">
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/70 backdrop-blur-sm transition-opacity duration-300">
+          <div className="relative bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-2xl w-full max-w-5xl mx-4 my-10 overflow-y-auto max-h-[85vh] transform transition-all duration-300 scale-100">
+          {/* <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg w-full"> */}
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                 Contact Details
               </h3>
             </div>
-
-            <div className="border rounded-lg divide-y divide-gray-200 dark:divide-gray-700 max-h-[50vh] overflow-y-auto">
+             <div className="border rounded-lg divide-y divide-gray-100 dark:divide-gray-700">
+            {/* <div className="border rounded-lg divide-y divide-gray-200 dark:divide-gray-700 max-h-[50vh] overflow-y-auto"> */}
               <div className="flex justify-between px-4 py-2">
                 <span className="font-medium">Name:</span>
                 <span>{selectedContact.ContactName}</span>
@@ -228,7 +231,8 @@ export default function ContactList() {
                     .replace(/ /g, "/")}
                 </span>
               </div>
-              <div className="flex justify-between px-4 py-2">
+               <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-2 break-words">
+              {/* <div className="flex justify-between px-4 py-2"> */}
                 <span className="font-medium">Email:</span>
                 <a
                   href={`mailto:${selectedContact.ContactEmail}`}
@@ -251,7 +255,8 @@ export default function ContactList() {
                   {selectedContact.ContactMessage}
                 </p>
               </div>
-            </div>
+               </div>
+            {/* </div> */}
 
             <div className="flex justify-end mt-4">
               <button
