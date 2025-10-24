@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 
-// Helper: Get cookie
+
 const getCookie = (name) => {
   if (typeof document === "undefined") return null;
   const value = `; ${document.cookie}`;
@@ -16,8 +16,8 @@ export default function NewsletterList() {
   const [subscribers, setSubscribers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [status, setStatus] = useState("");
 
-  // Pagination + search
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [search, setSearch] = useState("");
@@ -72,10 +72,15 @@ export default function NewsletterList() {
 
       const updatedSubscribers = subscribers.filter(s => !ids.includes(s.NLSubID));
       setSubscribers(updatedSubscribers);
-      setSelectedIds([]); // Clear selections after deletion
+      setSelectedIds([]);
       setSelectAll(false);
+      const successMessage = ids.length === 1
+        ? "Subscriber deleted successfully!"
+        : `${ids.length} subscribers deleted successfully!`;
+      setStatus(successMessage);
     } catch (err) {
-      alert(err.message);
+     // alert(err.message);
+     setStatus(err.message || "An unknown error occurred during deletion.");
     }
   };
 
@@ -106,16 +111,23 @@ export default function NewsletterList() {
     XLSX.writeFile(workbook, "newsletter_subscribers.xlsx");
   };
 
-  // ✅ Call all useEffect hooks unconditionally at the top level
+  // Call all useEffect hooks unconditionally at the top level
   useEffect(() => {
     fetchSubscribers();
   }, []);
+
+  useEffect(() => {
+    if (status) {
+      const timer = setTimeout(() => setStatus(""), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
 
   const filteredSubscribers = subscribers.filter((s) =>
     s.EmailAddress.toLowerCase().includes(search.toLowerCase())
   );
 
-  // ✅ This hook must also be called unconditionally before any early returns
+  // This hook must also be called unconditionally before any early returns
   useEffect(() => {
     const allFilteredIds = filteredSubscribers.map(s => s.NLSubID);
     const allSelected = allFilteredIds.length > 0 && allFilteredIds.every(id => selectedIds.includes(id));
@@ -133,6 +145,15 @@ export default function NewsletterList() {
 
   return (
     <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4">
+      {status && (
+        <div
+          className={`p-3 mb-4 text-sm rounded-lg ${
+            status.includes("successfully") ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+          }`}
+        >
+          {status}
+        </div>
+      )}
       <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
         <select
           value={rowsPerPage}
