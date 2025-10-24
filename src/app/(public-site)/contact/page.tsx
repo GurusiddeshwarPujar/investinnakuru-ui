@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3"; 
+
 
 type ContactFormInputs = {
   ContactName: string;
@@ -29,6 +31,9 @@ export default function ContactPage() {
   const [newsletterStatus, setNewsletterStatus] = useState<string | null>(null);
   const [newsletterLoading, setNewsletterLoading] = useState(false);
 
+
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const {
     register: registerContact,
     handleSubmit: handleSubmitContact,
@@ -53,7 +58,6 @@ export default function ContactPage() {
     }
   }, [contactStatus]);
 
-
   useEffect(() => {
     if (newsletterStatus) {
       const timer = setTimeout(() => setNewsletterStatus(null), 5000);
@@ -61,22 +65,48 @@ export default function ContactPage() {
     }
   }, [newsletterStatus]);
 
-
+  
   const onSubmitContact: SubmitHandler<ContactFormInputs> = async (data) => {
     setContactLoading(true);
     setContactStatus(null);
+
+    
+    if (!executeRecaptcha) {
+      console.error("reCAPTCHA not initialized");
+      setContactStatus("reCAPTCHA error. Please reload the page.");
+      setContactLoading(false);
+      return;
+    }
+
+   
+    const recaptchaToken = await executeRecaptcha("contactForm");
+    
+    
+    if (!recaptchaToken) {
+       setContactStatus("reCAPTCHA token generation failed.");
+       setContactLoading(false);
+       return;
+    }
 
     try {
       const contacturl = `${baseUrl}/api/contacts`;
       const res = await fetch(contacturl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+     
+        body: JSON.stringify({ ...data, recaptchaToken }),
       });
 
       if (res.status === 404) {
         router.push("/error-404");
         return;
+      }
+      
+      
+      if (res.status === 403) {
+         setContactStatus("Verification failed. Please try again.");
+         setContactLoading(false);
+         return;
       }
 
       if (res.status >= 500) {
@@ -101,7 +131,7 @@ export default function ContactPage() {
       }
     } catch (err) {
       console.error(err);
-       router.push("/error-505");
+      router.push("/error-505");
       setContactStatus("Server error. Please try again.");
     } finally {
       setContactLoading(false);
@@ -109,25 +139,49 @@ export default function ContactPage() {
   };
 
 
-  // Newsletter form submission
-const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
-  data
-) => {
-  setNewsletterLoading(true);
-  setNewsletterStatus(null);
+  const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
+    data
+  ) => {
+    setNewsletterLoading(true);
+    setNewsletterStatus(null);
 
-  try {
-    const letterurl = `${baseUrl}/api/newslettersubscriber`;
-    const res = await fetch(letterurl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+   
+    if (!executeRecaptcha) {
+      console.error("reCAPTCHA not initialized");
+      setNewsletterStatus("reCAPTCHA error. Please reload the page.");
+      setNewsletterLoading(false);
+      return;
+    }
 
+  
+    const recaptchaToken = await executeRecaptcha("newsletterSubscription");
 
-    if (res.status === 404) {
+   
+    if (!recaptchaToken) {
+       setNewsletterStatus("reCAPTCHA token generation failed.");
+       setNewsletterLoading(false);
+       return;
+    }
+
+    try {
+      const letterurl = `${baseUrl}/api/newslettersubscriber`;
+      const res = await fetch(letterurl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        
+        body: JSON.stringify({ ...data, recaptchaToken }),
+      });
+
+      if (res.status === 404) {
         router.push("/error-404");
         return;
+      }
+
+      
+      if (res.status === 403) {
+         setNewsletterStatus("Verification failed. Please try again.");
+         setNewsletterLoading(false);
+         return;
       }
 
       if (res.status >= 500) {
@@ -135,35 +189,34 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
         return;
       }
 
-    const text = await res.text();
-    let responseData: ApiResponse = {};
-    try {
-      responseData = JSON.parse(text);
-    } catch {
-      responseData = { msg: text };
-      console.warn("Response is not JSON:", text);
+      const text = await res.text();
+      let responseData: ApiResponse = {};
+      try {
+        responseData = JSON.parse(text);
+      } catch {
+        responseData = { msg: text };
+        console.warn("Response is not JSON:", text);
+      }
+
+      if (res.ok) {
+        setNewsletterStatus("Subscribed successfully!");
+        resetNewsletter(); 
+      } else {
+        setNewsletterStatus(responseData?.msg || "Failed to subscribe.");
+        resetNewsletter(); 
+      }
+    } catch (err) {
+      console.error(err);
+      setNewsletterStatus("Server error. Please try again.");
+      resetNewsletter(); 
+    } finally {
+      setNewsletterLoading(false);
     }
+  };
 
-    if (res.ok) {
-      setNewsletterStatus("Subscribed successfully!");
-      resetNewsletter(); // clear input on success
-    } else {
-      setNewsletterStatus(responseData?.msg || "Failed to subscribe.");
-      resetNewsletter(); // clear input also on error (e.g., already subscribed)
-    }
-  } catch (err) {
-    console.error(err);
-    setNewsletterStatus("Server error. Please try again.");
-    resetNewsletter(); // clear input on server error
-  } finally {
-    setNewsletterLoading(false);
-  }
-};
-
-
+ 
   return (
     <>
-      
       <section className="bg-gray-100 text-gray-800 py-11">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
@@ -174,7 +227,6 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
         </div>
       </section>
 
-     
       <div className="md:py-[90px] py-[60px] bg-white">
         <div className="container">
           <div className="max-w-4xl mx-auto">
@@ -253,7 +305,7 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
                 )}
               </div>
 
-              {/* Subject */}
+              
               <div className="form-group">
                 <label htmlFor="ContactSubject" className="form-label">
                   Subject
@@ -274,7 +326,7 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
                 )}
               </div>
 
-              {/* Message */}
+              
               <div className="form-group md:col-span-2">
                 <label htmlFor="ContactMessage" className="form-label">
                   Message
@@ -295,7 +347,7 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
                 )}
               </div>
 
-              {/* Submit */}
+             
               <div className="text-center md:col-span-2 mt-4">
                 <button
                   type="submit"
@@ -304,16 +356,18 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
                 >
                   {contactLoading ? "Sending..." : "Submit Message"}
                 </button>
+               
                 {contactStatus && (
-                  <p className="mt-2 text-green-600">{contactStatus}</p>
+                  <p className={`mt-2 ${contactStatus.includes('successfully') ? 'text-green-600' : 'text-red-600'}`}>{contactStatus}</p>
                 )}
+                
               </div>
             </form>
           </div>
         </div>
       </div>
 
-      {/* Newsletter Section */}
+      
       <div className="py-16 bg-secondary text-white">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
@@ -352,8 +406,9 @@ const onSubmitNewsletter: SubmitHandler<NewsletterFormInputs> = async (
               </p>
             )}
             {newsletterStatus && (
-              <p className="mt-2 text-green-200">{newsletterStatus}</p>
+              <p className={`mt-2 ${newsletterStatus.includes('successfully') ? 'text-green-200' : 'text-red-200'}`}>{newsletterStatus}</p>
             )}
+            
           </div>
         </div>
       </div>

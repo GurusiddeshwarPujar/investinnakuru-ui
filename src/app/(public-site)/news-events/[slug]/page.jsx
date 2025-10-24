@@ -2,7 +2,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import SuccessStories from "@/components/home/successStories";
+
 
 export const dynamic = "force-dynamic";
 
@@ -77,7 +77,7 @@ export default async function NewsDetailsPage({ params }) {
         </div>
       </div>
 
-      <SuccessStories />
+     
     </>
   );
 }
