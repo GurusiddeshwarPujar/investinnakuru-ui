@@ -98,6 +98,7 @@ export default function ContactPage() {
       });
 
       if (res.status === 404) {
+        setContactLoading(false);
         router.push("/error-404");
         return;
       }
@@ -110,6 +111,7 @@ export default function ContactPage() {
       }
 
       if (res.status >= 500) {
+        setContactLoading(false);
         router.push("/error-505");
         return;
       }
@@ -120,7 +122,7 @@ export default function ContactPage() {
         responseData = JSON.parse(text);
       } catch {
         responseData = { msg: text };
-        console.warn("Response is not JSON:", text);
+       // console.warn("Response is not JSON:", text);
       }
 
       if (res.ok) {
@@ -131,7 +133,7 @@ export default function ContactPage() {
       }
     } catch (err) {
       console.error(err);
-      router.push("/error-505");
+      //router.push("/error-505");
       setContactStatus("Server error. Please try again.");
     } finally {
       setContactLoading(false);
