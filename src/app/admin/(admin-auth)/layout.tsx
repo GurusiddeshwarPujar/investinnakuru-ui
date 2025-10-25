@@ -23,7 +23,24 @@ export default function AdminAuthLayout({
     <div className="relative p-6 bg-white z-1 dark:bg-gray-900 sm:p-0">
       <ThemeProvider>
         <div className="relative flex lg:flex-row w-full h-screen justify-center flex-col dark:bg-gray-900 sm:p-0">
-          {children} {/* This is where your login/signup form will be rendered */}
+         <div className="flex justify-center w-full lg:hidden pt-10 pb-4 mt-8">
+            <Link href="/admin" className="flex items-center">
+              <Image
+                width={40}
+                height={40}
+                src="/images/logo/logo.png"
+                alt="Logo"
+                className="object-contain mr-3"
+              />
+              <p className="text-gray-800 text-xl font-bold dark:text-white">
+                Invest In Nakuru
+              </p>
+            </Link>
+          </div>
+         
+         
+         
+          {children} 
           <div className="lg:w-1/2 w-full h-full bg-brand-950 dark:bg-white/5 lg:grid items-center hidden">
             <div className="relative items-center justify-center flex z-1">
               {/* */}
@@ -54,3 +71,5 @@ export default function AdminAuthLayout({
     </div>
   );
 }
+
+

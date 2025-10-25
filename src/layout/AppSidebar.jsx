@@ -322,7 +322,7 @@ const AppSidebar = () => {
             <Image
               src="/images/logo/logo.png"
               alt="Invest In Nakuru"
-              width={48} 
+              width={24} 
               height={48}
               className="object-contain"
             />
@@ -337,7 +337,7 @@ const AppSidebar = () => {
             <Image
               src="/images/logo/logo.png"
               alt="Invest In Nakuru"
-              width={48}
+              width={24}
               height={48}
               className="object-contain"
             />

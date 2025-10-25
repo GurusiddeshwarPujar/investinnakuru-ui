@@ -47,6 +47,9 @@ export default function SignInForm() {
     }
 
     setIsLoading(true);
+    //new
+    const expiresInDays = isChecked ? 7 : 1;
+    const maxAgeSeconds = 60 * 60 * 24 * expiresInDays;
 
     try {
       const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
@@ -60,7 +63,7 @@ export default function SignInForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password,expiresInDays }),
       });
 
       if (response.ok) {
@@ -69,16 +72,18 @@ export default function SignInForm() {
         
         // This form is exclusively for admins, so we set the isAdmin cookie to true.
         setCookie(null, "authToken", token, {
-          maxAge: 60 * 60 * 24 * (isChecked ? 7 : 1),
+          //maxAge: 60 * 60 * 24 * (isChecked ? 7 : 1),
+          maxAge: maxAgeSeconds,
           path: "/",
           httpOnly: false,
           secure: process.env.NODE_ENV === "production",
           sameSite: "Lax",
         });
 
-        // ⭐ NEW: Set the 'isAdmin' cookie to 'true' to satisfy the middleware's check.
+        // NEW: Set the 'isAdmin' cookie to 'true' to satisfy the middleware's check.
         setCookie(null, "isAdmin", "true", {
-          maxAge: 60 * 60 * 24 * (isChecked ? 7 : 1),
+          //maxAge: 60 * 60 * 24 * (isChecked ? 7 : 1),
+          maxAge: maxAgeSeconds,
           path: "/",
           httpOnly: false,
           secure: process.env.NODE_ENV === "production",
@@ -86,7 +91,8 @@ export default function SignInForm() {
         });
 
         // Redirect to the admin dashboard upon a successful admin login.
-        router.push("/admin");
+       // router.push("/admin");
+       window.location.href = "/admin"
 
       } else {
         const data = await response.json();
@@ -106,7 +112,7 @@ export default function SignInForm() {
         <div>
           <div className="mb-5 sm:mb-8">
             <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
-              Login
+              Admin Login
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Enter your email and password to login!
