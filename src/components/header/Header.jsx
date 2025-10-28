@@ -91,37 +91,37 @@ export default function Header() {
 					<div className="flex items-center h-full justify-center">
 					<ul className="flex flex-col max-h-full overflow-auto gap-6 font-bold text-lg text-center w-full">
 						<li>
-							<Link href="/">Home</Link>
+							<Link href="/" onClick={() => {setMenuOpen(false); }}>Home</Link>
 						</li>
 						<li>
-							<Link href="/investment-opportunities">Investment Opportunities</Link>
+							<Link href="/investment-opportunities" onClick={() => {setMenuOpen(false); }}>Investment Opportunities</Link>
 						</li>
 						<li>
-							<Link href="/diaspora-engagement">Diaspora Engagement</Link>
+							<Link href="/diaspora-engagement" onClick={() => {setMenuOpen(false); }}>Diaspora Engagement</Link>
 						</li>
 						<li>
-							<Link href="/key-sectors">Key Sectors</Link>
+							<Link href="/key-sectors" onClick={() => {setMenuOpen(false); }}>Key Sectors</Link>
 						</li>
 						<li>
-							<Link href="/contact">Contact Us</Link>
+							<Link href="/contact" onClick={() => {setMenuOpen(false); }}>Contact Us</Link>
 						</li>
 						<li>
-							<Link href="/why-nakuru">Why Nakuru</Link>
+							<Link href="/why-nakuru" onClick={() => {setMenuOpen(false); }}>Why Nakuru</Link>
 						</li>
 						<li>
-							<Link href="/about-us">About Us</Link>
+							<Link href="/about-us" onClick={() => {setMenuOpen(false); }}>About Us</Link>
 						</li>
 						<li>
-							<Link href="/incentives-support">Incentives & Support</Link>
+							<Link href="/incentives-support" onClick={() => {setMenuOpen(false); }}>Incentives & Support</Link>
 						</li>
 						<li>
-							<Link href="/success-stories">Success Stories</Link>
+							<Link href="/success-stories" onClick={() => {setMenuOpen(false); }}>Success Stories</Link>
 						</li>
 						<li>
-							<Link href="/news-events">News & Events</Link>
+							<Link href="/news-events" onClick={() => {setMenuOpen(false); }}>News & Events</Link>
 						</li>
 						<li>
-							<Link href="/data-reports">Data & Report</Link>
+							<Link href="/data-reports" onClick={() => {setMenuOpen(false); }}>Data & Report</Link>
 						</li>
 					</ul>
 					</div>
