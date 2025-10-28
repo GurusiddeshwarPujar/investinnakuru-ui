@@ -357,3 +357,18 @@ p{
 .description tr:nth-child(even) {
   @apply bg-gray-50;
 }
+
+.hero-banner-slider .swiper-button-prev:after,
+.hero-banner-slider .swiper-button-next:after,
+.events-slider-outer .swiper-button-prev:after,
+.events-slider-outer .swiper-button-next:after,
+.whatson-slider-outer .swiper-button-prev:after,
+.whatson-slider-outer .swiper-button-next:after,
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  content: none !important;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  font-size: 0 !important;
+}
