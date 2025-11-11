@@ -49,7 +49,7 @@ export default function Header() {
 					<div className="flex flex-nowrap items-center justify-between">
 						<div className="flex-shrink">
 							<Link href="/">
-								<Image src="/frontend/images/logo.png" alt="Nakuru" width={127} height={70} className="md:max-w-[100%] max-w-[110px]"/>
+								<Image src="/frontend/images/logo.png" alt="Nakuru" width={150} height={70} className="md:max-w-[100%] max-w-[110px]"/>
 							</Link>
 						</div>
 
