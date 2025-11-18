@@ -59,10 +59,7 @@ export default async function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-10 text-center">
             <p>
-              As the <strong>official investment platform of Nakuru County</strong>, InvestInNakuru.com
-              is designed to make your investor journey simple, transparent, and rewarding. From
-              discovering viable projects to accessing permits, tax incentives, and diaspora bonds,
-              this platform is your direct connection to county-backed opportunities.
+              <strong>InvestInNakuru.com</strong> is designed to make your investor journey simple, transparent, and rewarding. From discovering viable projects to accessing permits, tax incentives, and diaspora bonds, this platform is your direct connection to county-backed opportunities.
             </p>
           </div>
 
