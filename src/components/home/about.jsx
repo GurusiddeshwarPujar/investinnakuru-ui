@@ -13,7 +13,11 @@ export default function About(){
                         <Image src="/frontend/images/nakuru-team.png" alt="Nakuru team" width={570} height={700} />
                     </div>
                     <div className="p-0">
-                        <h2 className="mb-6">Welcome to Nakuru: Kenya&nbsp;s Thriving Economic Powerhouse</h2>
+                        {/* <h2 className="mb-6">Welcome to Nakuru: <span >Kenya&nbsp;s Thriving Economic Powerhouse</span></h2> */}
+                           <h2 className="mb-2">Welcome to Nakuru:</h2>
+                            <h5 className="mb-6">
+                            Kenya’s Thriving Economic Powerhouse
+                            </h5>
                         <div className="description mb-6">
                             <p>Nestled in the heart of the majestic Great Rift Valley, Nakuru County is more than just a beautiful destination; it’s fast becoming a key economic hub in Kenya. Its wealth of natural resources, a young, innovative and educated workforce, and supportive leadership make it attractive for investors and new businesses.</p>
                             <p>With a vibrant entrepreneurial spirit, local businesses are flourishing and positioning Nakuru as a leading investment hub in East Africa. Key sectors, including geothermal energy, agro-processing, healthcare, tourism, real estate, and infrastructure, offer strong prospects for sustainable development and meaningful community advancement.</p>

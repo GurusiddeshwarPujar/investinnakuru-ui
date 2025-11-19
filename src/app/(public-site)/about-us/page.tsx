@@ -74,8 +74,11 @@ export default async function AboutPage() {
                   className="rounded-lg shadow-lg"
                 />
               </div>
-
-              <div className="description" dangerouslySetInnerHTML={{ __html: cmsEntry.CmsText }} />
+              <h2 className="mb-2">Welcome to Nakuru:</h2>
+                            <h5 className="mb-6">
+                            Kenya’s Thriving Economic Powerhouse
+                            </h5>
+              <div className="" dangerouslySetInnerHTML={{ __html: cmsEntry.CmsText }} />
 
               <div className="clear-both mt-6">
                 <Link href="/contact" className="btn">
