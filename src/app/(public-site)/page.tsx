@@ -12,7 +12,8 @@ import NewsEvent from "@/components/home/newsEvents";
 import FooterInfo from "@/components/home/footerInfo";
 
 export const metadata = {
-  title: "Invest In Nakuru | Official Investment Platform of Nakuru County",
+  title : "Home | Invest In Nakuru",
+  //title: "Invest In Nakuru | Official Investment Platform of Nakuru County",
   description:
     "Welcome to Invest In Nakuru, the official investment platform of Nakuru County. Explore profitable opportunities in real estate, agribusiness, tourism, manufacturing, green energy, and infrastructure. Learn about tax incentives, government support, and secure diaspora investment channels.",
   keywords:
